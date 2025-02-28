@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Alert, Image, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { styles } from './cadastro_style';
+import { styles } from "./cadastro-style";
+
+interface FormData {
+    nome: string;
+    email: string;
+    telefone: string;
+    senha: string;
+    confirmarSenha: string;
+  }
+
+interface Errors {
+    nome?: string;
+    email?: string;
+    telefone?: string;
+    senha?: string;
+    confirmarSenha?: string;
+  }
 
 const Cadastro = () => {
     const [step,setStep] = useState(1);
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         nome: '',
         email: '',
         telefone:'',
@@ -13,17 +29,38 @@ const Cadastro = () => {
         confirmarSenha:''
     });
 
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState<Errors>({});
+
     
-
     const validarStep1 = () => {
-        const newErrors = () => newErrors
-
-        if(!formData.nome.trim()) newErrors.nome = 'Nome é obrigatório meu Dog'; 
-        if(!formData.email.trim()) newErrors.email = 'Email é obrigatório meu Dog';
-        else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email inválido meu Dog';
-        if(!formData.telefone.trim()) newErrors.telefone = 'Telefone obrigatório meu irmão';
         
+        const newErrors: Errors = {};
+        
+        if(formData.nome.trim() === ""){
+            newErrors.nome = "Nome obrigatório mano";
+        }
+        if(formData.email.trim() === ""){
+            newErrors.email = "Lembre-se de preencher o E-mail"
+        } else{
+            const emailValido = /\S+@\S+\.\S+/;
+            if(!emailValido.test(formData.email)){
+                newErrors.email = "Este E-mail não é válido!!";
+            }
+        }
+        
+        const telefone = formData.telefone.trim();
+
+        if (telefone === "") {
+            newErrors.telefone = "Telefone obrigatório, meu irmão";
+        } 
+        // Verificando se o telefone contém apenas números e tem o tamanho esperado
+        else {
+            const telefoneLimpo = telefone.replace(/\D/g, ""); // Remove tudo que não for número
+            if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
+                newErrors.telefone = "Número de telefone inválido, meu irmão";
+            }
+        }
+
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
         
@@ -31,13 +68,48 @@ const Cadastro = () => {
 
 
     const validarStep2 = () => {
-        const newErrors = () => newErrors
-        if (!formData.senha) newErrors.senha = 'Senha é obrigatória';
-        else if (formData.senha.length < 6) newErrors.senha = 'Senha deve ter pelo menos 6 caracteres';
-        if (formData.senha !== formData.confirmarSenha) newErrors.confirmarSenha = 'Senhas não coincidem';
+
+
+        const newErrors: Record<string,string> = {};
+        newErrors.foo = "foo";
+        console.log(newErrors);
+        
+        // formData é apenas um armazenamento de dados
+        // newErrors é apenas um reconhecimento de erros 
+        const senha = formData.senha.trim();
+        const confirmarSenha = formData.confirmarSenha.trim();
+    
+        if (!senha) {
+            newErrors.senha = "A senha é obrigatória!!";
+        } else if (senha.length < 6) {
+            newErrors.senha = "Senha deve ter pelo menos 6 caracteres!!";
+        }
+    
+        if (!confirmarSenha) {
+            newErrors.confirmarSenha = "Confirmação de senha é obrigatória!!!";
+        } 
+        else if (senha != confirmarSenha) {
+            newErrors.confirmarSenha = "As senhas estão diferentes";
+        }
+    
         setErrors(newErrors);
+    
         return Object.keys(newErrors).length === 0;
     };
+
+    // const handleContinue2 = () => {
+
+    //     if(step === 1) {
+    //         if(!validarStep1()) return;
+    //         setStep(2);
+    //         return;
+    //     }
+
+    //     if(!validarStep2()) return;
+        
+    //     console.log('Dados do consagrado: ', formData);
+    //     Alert.alert('Sucesso', ' Cadastro realizxado com sucesso');
+    // };
 
 
     const handleContinue = () => {
@@ -60,11 +132,13 @@ const Cadastro = () => {
 
     return (
         <View style={styles.container}>
-            <View style={styles.headerContainer}>
+            
+            <View style = {styles.headerContainer}>
                 <Image
-                    source={require('../../assets/pet-connect-logo.svg')}
-                    style={styles.logo}
+                source={require('Mob-Pet-Connect\pet-connect\assets\icone.png')}
+                style = {styles.logo}
                 />
+                
                 <Text style={styles.title}>Cadastro</Text>
             </View>
 
@@ -74,7 +148,7 @@ const Cadastro = () => {
                         style={[styles.input, errors.nome && styles.inputError]}
                         placeholder="Nome"
                         value={formData.nome}
-                        onChangeText={(text) => setFormData({...formData, nome: text})}
+                        onChangeText={(text : string) => setFormData({...formData, nome: text})}
                     />
                     {errors.nome && <Text style={styles.errorText}>{errors.nome}</Text>}
                     
@@ -82,7 +156,7 @@ const Cadastro = () => {
                         style={[styles.input, errors.email && styles.inputError]}
                         placeholder="Email"
                         value={formData.email}
-                        onChangeText={(text) => setFormData({...formData, email: text})}
+                        onChangeText={(text: string) => setFormData({...formData, email: text})}
                         keyboardType="email-address"
                         autoCapitalize="none"
                     />
@@ -92,7 +166,7 @@ const Cadastro = () => {
                         style={[styles.input, errors.telefone && styles.inputError]}
                         placeholder="Telefone"
                         value={formData.telefone}
-                        onChangeText={(text) => setFormData({...formData, telefone: text})}
+                        onChangeText={(text: string) => setFormData({...formData, telefone: text})}
                         keyboardType="phone-pad"
                     />
                     {errors.telefone && <Text style={styles.errorText}>{errors.telefone}</Text>}
@@ -101,18 +175,18 @@ const Cadastro = () => {
                 <View style={styles.formContainer}>
                     <TextInput
                         style={[styles.input, errors.senha && styles.inputError]}
-                        placeholder="Senha"
+                        placeholder="Coloque sua senha"
                         value={formData.senha}
-                        onChangeText={(text) => setFormData({...formData, senha: text})}
+                        onChangeText={(text: string) => setFormData({...formData, senha: text})}
                         secureTextEntry
                     />
                     {errors.senha && <Text style={styles.errorText}>{errors.senha}</Text>}
                     
                     <TextInput
                         style={[styles.input, errors.confirmarSenha && styles.inputError]}
-                        placeholder="Confirmar Senha"
+                        placeholder="Confirmar sua senha"
                         value={formData.confirmarSenha}
-                        onChangeText={(text) => setFormData({...formData, confirmarSenha: text})}
+                        onChangeText={(text: string) => setFormData({...formData, confirmarSenha: text})}
                         secureTextEntry
                     />
                     {errors.confirmarSenha && <Text style={styles.errorText}>{errors.confirmarSenha}</Text>}
@@ -122,7 +196,7 @@ const Cadastro = () => {
             <TouchableOpacity 
                 style={styles.button}
                 onPress={handleContinue}
-            >
+                >
                 <Text style={styles.buttonText}>Continuar</Text>
             </TouchableOpacity>
 
@@ -136,7 +210,11 @@ const Cadastro = () => {
                     step === 2 ? styles.activeDot : styles.inactiveDot
                 ]} />
             </View>
+
         </View>
+        
     );
 
-}
+};
+
+export default Cadastro;
