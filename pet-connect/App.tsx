@@ -1,14 +1,13 @@
 import "@/global.css";
 import React from "react";
-import { StyleSheet, Text, View } from 'react-native';
-import { GluestackUIProvider } from "./components/ui/gluestack-ui-provider";
-
+import { StyleSheet } from 'react-native';
+import LoginScreen from '../pet-connect/src/pages/login/login';
 export default function App() {
   return (
+    <>
+      <LoginScreen />
+    </>
 
-    <GluestackUIProvider mode="light"><View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View></GluestackUIProvider>
   );
 }
 
