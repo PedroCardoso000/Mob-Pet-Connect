@@ -7,9 +7,9 @@ import LoginScreen from './src/pages/login/login';
 export default function App() {
   return (
     <GluestackUIProvider mode="light"><View style={styles.container}>
-        <Text>Open up App.tsx to start working on your app!</Text>
-        <StatusBar style="auto" />
-      </View></GluestackUIProvider>
+      <Text>Open up App.tsx to start working on your app!</Text>
+      <StatusBar style="auto" />
+    </View></GluestackUIProvider>
   );
 }
 
