@@ -16,7 +16,6 @@ const StepTwoScreenRegister = () => {
     const [errors, setErrors] = useState<Errors>({});
     return (
         <>
-
             <View style={registerStyles.formContainer}>
                 <TextInput
                     style={[registerStyles.input, errors.senha && registerStyles.inputError]}

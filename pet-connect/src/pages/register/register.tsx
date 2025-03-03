@@ -6,8 +6,6 @@ import { FormData } from "../../../@types/FormData";
 import StepOneScreenRegister from './step-screens/StepOneScreenRegister';
 import StepTwoScreenRegister from './step-screens/StepTwoScreenRegister';
 
-
-
 const RegisterScreen = () => {
 
   const [step, setStep] = useState(1);
@@ -116,7 +114,7 @@ const RegisterScreen = () => {
         <Text style={registerStyles.title}>Cadastro</Text>
       </View>
 
-      {step === 1 ? <StepOneScreenRegister /> : <StepTwoScreenRegister/> }
+      {step === 1 ? <StepOneScreenRegister /> : <StepTwoScreenRegister />}
 
       <TouchableOpacity
         style={registerStyles.button}
@@ -126,15 +124,21 @@ const RegisterScreen = () => {
       </TouchableOpacity>
 
       <View style={registerStyles.dotsContainer}>
-        <View style={[
-          registerStyles.dot,
-          step === 1 ? registerStyles.activeDot : registerStyles.inactiveDot
-        ]} />
-        <View style={[
-          registerStyles.dot,
-          step === 2 ? registerStyles.activeDot : registerStyles.inactiveDot
-        ]} />
+        <TouchableOpacity onPress={() => setStep(1)}>
+          <View style={[
+            registerStyles.dot,
+            step === 1 ? registerStyles.activeDot : registerStyles.inactiveDot
+          ]} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => setStep(2)}>
+          <View style={[
+            registerStyles.dot,
+            step === 2 ? registerStyles.activeDot : registerStyles.inactiveDot
+          ]} />
+        </TouchableOpacity>
       </View>
+
 
     </View>
 
