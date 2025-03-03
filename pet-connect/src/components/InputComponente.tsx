@@ -2,10 +2,12 @@ import { TextInput, TextInputProps, View, Text, Image } from "react-native";
 
 type InputComponentProps = {
   placeholder: string;
-  icon?: any; 
+  icon?: any;
+  styleInput?: any;
+ 
 } & TextInputProps;
 
-const InputComponent = ({ placeholder, icon, ...rest }: InputComponentProps) => {
+const InputComponent = ({ placeholder, icon, styleInput, ...rest }: InputComponentProps) => {
   return (
     <View style={{ 
       flexDirection: "row", 
@@ -15,7 +17,9 @@ const InputComponent = ({ placeholder, icon, ...rest }: InputComponentProps) => 
       borderRadius: 8,
       margin: 5, 
       padding: 5,
-      borderColor: "#E0E0E0"}}>
+      borderColor: "#E0E0E0",
+      ...styleInput}}
+      >
 
       <Image
         source={icon} 
