@@ -1,19 +1,32 @@
-import { TextInput, TextInputProps, View, Text } from "react-native";
+import { TextInput, TextInputProps, View, Text, Image } from "react-native";
 
 type InputComponentProps = {
   placeholder: string;
-  icon: string;
-} & TextInputProps; 
+  icon?: any; 
+} & TextInputProps;
 
 const InputComponent = ({ placeholder, icon, ...rest }: InputComponentProps) => {
   return (
-    <View style={{ flexDirection: "row", alignItems: "center", borderWidth: 1, borderRadius: 8, padding: 10 }}>
-      <Text style={{ marginRight: 8 }}>{icon}</Text>
-      
+    <View style={{ 
+      flexDirection: "row", 
+      backgroundColor: "#F5F5F5" , 
+      alignItems: "center", 
+      borderWidth: 1, 
+      borderRadius: 8,
+      margin: 5, 
+      padding: 5,
+      borderColor: "#E0E0E0"}}>
+
+      <Image
+        source={icon} 
+        style={{ marginRight: 8, width: 20, height: 20 }}
+        resizeMode="contain"
+      />
+
       <TextInput
         placeholder={placeholder}
         style={{ flex: 1 }}
-        {...rest} 
+        {...rest}
       />
     </View>
   );

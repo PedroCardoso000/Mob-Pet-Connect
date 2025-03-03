@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { registerStyles } from "../register-style";
 import { Errors } from "@/@types/Errors";
 import { FormData } from "@/@types/FormData";
-
+import InputComponent from "@/src/components/InputComponente";
 
 const StepOneScreenRegister = () => {
     const [errors, setErrors] = useState<Errors>({});
@@ -21,31 +21,13 @@ const StepOneScreenRegister = () => {
         <>
 
             <View style={registerStyles.formContainer}>
-                <TextInput
-                    style={[registerStyles.input, errors.nome && registerStyles.inputError]}
-                    placeholder="Nome"
-                    value={formData.nome}
-                    onChangeText={(text: string) => setFormData({ ...formData, nome: text })}
-                />
+                <InputComponent placeholder="Nome" icon="../../../assets/password.png"/>
                 {errors.nome && <Text style={registerStyles.errorText}>{errors.nome}</Text>}
 
-                <TextInput
-                    style={[registerStyles.input, errors.email && registerStyles.inputError]}
-                    placeholder="Email"
-                    value={formData.email}
-                    onChangeText={(text: string) => setFormData({ ...formData, email: text })}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                />
+                <InputComponent placeholder="Email" icon="../../../../assets/password.png"/>
                 {errors.email && <Text style={registerStyles.errorText}>{errors.email}</Text>}
 
-                <TextInput
-                    style={[registerStyles.input, errors.telefone && registerStyles.inputError]}
-                    placeholder="Telefone"
-                    value={formData.telefone}
-                    onChangeText={(text: string) => setFormData({ ...formData, telefone: text })}
-                    keyboardType="phone-pad"
-                />
+                <InputComponent placeholder="Telefone" icon="../../../../assets/password.png"/>
                 {errors.telefone && <Text style={registerStyles.errorText}>{errors.telefone}</Text>}
             </View>
 

@@ -5,6 +5,7 @@ import { Errors } from "../../../@types/Errors";
 import { FormData } from "../../../@types/FormData";
 import StepOneScreenRegister from './step-screens/StepOneScreenRegister';
 import StepTwoScreenRegister from './step-screens/StepTwoScreenRegister';
+import ButtonComponent from '@/src/components/ButtonComponente';
 
 const RegisterScreen = () => {
 
@@ -104,7 +105,6 @@ const RegisterScreen = () => {
 
   return (
     <View style={registerStyles.container}>
-
       <View style={registerStyles.headerContainer}>
         <Image
           source={require('../../../assets/icone.png')}
@@ -116,12 +116,7 @@ const RegisterScreen = () => {
 
       {step === 1 ? <StepOneScreenRegister /> : <StepTwoScreenRegister />}
 
-      <TouchableOpacity
-        style={registerStyles.button}
-        onPress={handleContinue}
-      >
-        <Text style={registerStyles.buttonText}>Continuar</Text>
-      </TouchableOpacity>
+      <ButtonComponent  title='Continuar' />
 
       <View style={registerStyles.dotsContainer}>
         <TouchableOpacity onPress={() => setStep(1)}>

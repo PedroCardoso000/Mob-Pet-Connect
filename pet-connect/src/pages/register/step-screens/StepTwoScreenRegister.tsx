@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { registerStyles } from "../register-style";
 import { Errors } from "@/@types/Errors";
 import { FormData } from "@/@types/FormData";
+import InputComponent from "@/src/components/InputComponente";
 
 const StepTwoScreenRegister = () => {
     const [formData, setFormData] = useState<FormData>({
@@ -17,22 +18,10 @@ const StepTwoScreenRegister = () => {
     return (
         <>
             <View style={registerStyles.formContainer}>
-                <TextInput
-                    style={[registerStyles.input, errors.senha && registerStyles.inputError]}
-                    placeholder="Coloque sua senha"
-                    value={formData.senha}
-                    onChangeText={(text: string) => setFormData({ ...formData, senha: text })}
-                    secureTextEntry
-                />
+                <InputComponent placeholder="Senha" icon="../../../assets/password.png" />
                 {errors.senha && <Text style={registerStyles.errorText}>{errors.senha}</Text>}
 
-                <TextInput
-                    style={[registerStyles.input, errors.confirmarSenha && registerStyles.inputError]}
-                    placeholder="Confirmar sua senha"
-                    value={formData.confirmarSenha}
-                    onChangeText={(text: string) => setFormData({ ...formData, confirmarSenha: text })}
-                    secureTextEntry
-                />
+                <InputComponent placeholder="Confirmar Senha" icon="../../../assets/password.png" />
                 {errors.confirmarSenha && <Text style={registerStyles.errorText}>{errors.confirmarSenha}</Text>}
             </View>
         </>
