@@ -1,9 +1,8 @@
 import "@/global.css";
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
-import { Menu } from '@/src/pages/Menu';
 import LoginScreen from "./src/pages/login/login";
 import { PetList } from "./src/pages/Menu/PetList";
+import React from "react";
 
 export default function App() {
   return (
