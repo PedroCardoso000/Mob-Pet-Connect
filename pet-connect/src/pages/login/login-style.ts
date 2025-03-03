@@ -1,23 +1,20 @@
 import { StyleSheet } from 'react-native';
 
 export const loginstyles = StyleSheet.create({
-    // Container principal da tela de login
     container: {
         flex: 1,
-        justifyContent: 'center', // Centraliza os elementos verticalmente
-        alignItems: 'center',     // Centraliza os elementos horizontalmente
+        justifyContent: 'center', 
+        alignItems: 'center',     
         padding: 16,
-        marginBottom: 50,         // Espaço extra abaixo do container
-        backgroundColor: '#fff',  // Fundo branco para contraste
+        marginBottom: 50,         
+        backgroundColor: '#fff',  
     },
 
-    // Container do cabeçalho (ícone e título "Login")
     headerContainer: {
         justifyContent: 'center',
         alignItems: 'center',
     },
 
-    // Estilo do ícone no cabeçalho
     headerIcon: {
         width: 150,
         height: 150,
@@ -33,7 +30,6 @@ export const loginstyles = StyleSheet.create({
         marginTop: 10,            // Espaço entre o ícone e o texto
     },
 
-    // Container do rodapé (inputs e botão)
     footerContainer: {
         width: '100%',            // Ocupa toda a largura disponível
         marginTop: 50,           // Espaço entre o cabeçalho e os inputs
@@ -42,7 +38,6 @@ export const loginstyles = StyleSheet.create({
     },
 
     
-    // Estilo dos ícones ao lado dos inputs
     icon: {
         width: 20,
         height: 20,
@@ -51,7 +46,6 @@ export const loginstyles = StyleSheet.create({
         resizeMode: 'contain',    // Mantém a proporção da imagem
     },
     
-    // Container dos inputs (Email e Senha) com ícones
     inputContainer: {
         flexDirection: 'row',     // Ícone e input lado a lado
         alignItems: 'center',
@@ -62,7 +56,6 @@ export const loginstyles = StyleSheet.create({
     },
 
 
-    // Estilo dos campos de entrada (inputs)
     input: {
       
         borderWidth: 0,
@@ -71,7 +64,6 @@ export const loginstyles = StyleSheet.create({
         backgroundColor: '#DFDFDF', // Fundo cinza claro para contraste
     },
 
-    // Estilo do botão de login
     button: {
         borderRadius: 15,
         backgroundColor: '#499CFA', // Azul padrão do tema
@@ -82,7 +74,6 @@ export const loginstyles = StyleSheet.create({
         marginTop: 20,             // Espaço acima do botão
     },
 
-    // Estilo do texto dentro do botão
     buttonText: {
         color: '#fff',             // Texto branco para contraste
         fontSize: 16,
@@ -90,7 +81,6 @@ export const loginstyles = StyleSheet.create({
         textAlign: 'center',       // Garante centralização do texto
     },
 
-    // Estilo do texto "Cadastre-se"
     textCadastro: {
         fontSize: 15,
         color: '#499CFA',

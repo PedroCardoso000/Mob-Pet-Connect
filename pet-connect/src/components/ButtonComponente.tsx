@@ -1,19 +1,20 @@
 
 import { TouchableOpacity, Text, StyleProp, ViewStyle, TextStyle } from "react-native";
 
-type ButtonComponenteProps = {
+type ButtonComponentProps = {
   title: string;
-  onPress: () => void;
+  onPress?: () => void;
   buttonStyle?: StyleProp<ViewStyle>; 
   textStyle?: StyleProp<TextStyle>;   
 };
 
 
-const ButtonComponente = ({ title, onPress } : ButtonComponenteProps) => {
-    <TouchableOpacity onPress={onPress} style={{ padding: 10, backgroundColor: '#499CFA', borderRadius: 8 }}>
-        <Text style={{ color: 'white' }}>{title}</Text>
-    </TouchableOpacity>
+const ButtonComponent = ({ title, onPress } : ButtonComponentProps) => {
+   return ( <TouchableOpacity onPress={onPress} style={{ padding: 15, backgroundColor: '#499CFA',
+    borderRadius: 8, width: '50%', alignItems: 'center', marginBottom: 15,  }}>
+        <Text style={{ color: 'white', fontWeight: 'bold' }}>{title}</Text>
+    </TouchableOpacity>)
 }
 
-export default ButtonComponente;
+export default ButtonComponent;
 
