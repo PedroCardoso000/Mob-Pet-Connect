@@ -1,12 +1,12 @@
 import "@/global.css";
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import LoginScreen from "./src/pages/login/login";
-import { PetList } from "./src/pages/Menu/PetList";
 import React from "react";
+import  RegisterScreen  from "./src/pages/register/register";
 
 export default function App() {
   return (
-    <PetList />
+    <RegisterScreen/>
   );
 }
 

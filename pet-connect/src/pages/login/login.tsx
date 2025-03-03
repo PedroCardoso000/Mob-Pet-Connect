@@ -7,14 +7,12 @@ const LoginScreen = () => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // Aqui você pode adicionar a lógica de autenticação.
     console.log('Email:', email);
     console.log('Password:', password);
   };
 
   return (
     <View style={loginstyles.container}>
-      {/* Cabeçalho com ícone e título */}
       <View style={loginstyles.headerContainer}>
         <Image
           source={require('../../../assets/icone.png')}
@@ -23,9 +21,7 @@ const LoginScreen = () => {
         <Text style={loginstyles.textLogin}>Login</Text>
       </View>
 
-      {/* Área dos inputs e botão */}
       <View style={loginstyles.footerContainer}>
-        {/* Campo de Email */}
         <View style={loginstyles.inputContainer}>
           <Image
             source={require('../../../assets/email.png')}
@@ -41,7 +37,6 @@ const LoginScreen = () => {
           />
         </View>
 
-        {/* Campo de Senha */}
         <View style={loginstyles.inputContainer}>
           <Image
             source={require('../../../assets/password.png')}
@@ -56,13 +51,11 @@ const LoginScreen = () => {
           />
         </View>
 
-        {/* Botão de login */}
         <TouchableOpacity style={loginstyles.button} onPress={handleLogin}>
           <Text style={loginstyles.buttonText}>Entrar</Text>
         </TouchableOpacity>
       </View>
 
-      {/* Texto de cadastro */}
       <Text style={loginstyles.textCadastro}>Cadastre-se</Text>
     </View>
   );
