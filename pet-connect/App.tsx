@@ -6,7 +6,7 @@ import  RegisterScreen  from "./src/pages/register/register";
 
 export default function App() {
   return (
-    <LoginScreen/>
+    <RegisterScreen/>
   );
 }
 
