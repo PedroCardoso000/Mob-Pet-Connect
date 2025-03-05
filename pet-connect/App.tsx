@@ -3,19 +3,11 @@ import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import LoginScreen from "./src/pages/login/login";
 import React from "react";
 import  RegisterScreen  from "./src/pages/register/register";
-import  UserScreen  from "./src/pages/user-screen/UserScreen";
+import UserProfileScreen from "./src/pages/user-screen/userProfileScreen";
 
 export default function App() {
   return (
-    <UserScreen/>
+    <UserProfileScreen/>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
