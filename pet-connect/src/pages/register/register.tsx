@@ -5,7 +5,7 @@ import { Errors } from "../../../@types/Errors";
 import { FormData } from "../../../@types/FormData";
 import StepOneScreenRegister from './step-screens/StepOneScreenRegister';
 import StepTwoScreenRegister from './step-screens/StepTwoScreenRegister';
-import ButtonComponent from '@/src/components/ButtonComponente';
+import ButtonComponent from '@/src/components/ButtonConnect';
 
 const RegisterScreen = () => {
 
