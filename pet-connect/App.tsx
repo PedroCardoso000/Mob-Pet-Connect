@@ -1,15 +1,12 @@
 import "@/global.css";
-import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
-import { StyleSheet, Text, View } from 'react-native';
-import { Menu } from '@/src/pages/Menu';
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import LoginScreen from "./src/pages/login/login";
+import React from "react";
+import  RegisterScreen  from "./src/pages/register/register";
 
 export default function App() {
   return (
-
-    <GluestackUIProvider mode="light"><View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View></GluestackUIProvider>
+    <LoginScreen/>
   );
 }
 
