@@ -1,16 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import Cadastro from '../pages/cadastro/cadastro';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import RegisterScreen from '../pages/register/register';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Cadastro">
+      <Stack.Navigator initialRouteName="Register">
         <Stack.Screen 
-          name="Cadastro" 
-          component={Cadastro}
+          name="Register" 
+          component={RegisterScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

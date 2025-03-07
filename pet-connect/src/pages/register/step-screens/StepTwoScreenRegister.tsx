@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { registerStyles } from "../register-style";
 import { Errors } from "@/@types/Errors";
 import { FormData } from "@/@types/FormData";
-import InputComponent from "@/src/components/InputComponente";
+import InputComponent from "@/src/components/InputConnect";
 
 const StepTwoScreenRegister = () => {
     const [formData, setFormData] = useState<FormData>({
