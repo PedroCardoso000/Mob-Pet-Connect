@@ -4,7 +4,6 @@ type InputComponentProps = {
   placeholder: string;
   icon?: any;
   styleInput?: any;
- 
 } & TextInputProps;
 
 const InputComponent = ({ placeholder, icon, styleInput, ...rest }: InputComponentProps) => {
