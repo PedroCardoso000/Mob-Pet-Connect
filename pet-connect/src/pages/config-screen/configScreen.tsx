@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import styleConfigScreen from "./configScreen-style";
 import InputComponent from "@/src/components/InputConnect";
 import React, { useState } from "react";
+import CheckBox from "@/src/components/CheckBox";
 
 const ConfigScreen = () => {
     const [name, setName] = useState<string>('');
@@ -9,7 +10,7 @@ const ConfigScreen = () => {
     const [birth, setBirth] = useState<string | undefined>();
     const [phone, setPhone] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [sex, setSex] = useState<string>(''); // Estado para armazenar "Masculino" ou "Feminino"
+    const [sex, setSex] = useState<string>('');
 
     return (
         <View style={styleConfigScreen.container}>
@@ -29,7 +30,6 @@ const ConfigScreen = () => {
                 <InputComponent
                     placeholder="Data de Nascimento"
                     value={birth}
-                    icon={require("@/assets/password.png")}
                     onChangeText={setBirth}
                     keyboardType="name-phone-pad"
                     autoCapitalize="none"
@@ -37,36 +37,15 @@ const ConfigScreen = () => {
 
 
                 <View style={styleConfigScreen.sexContainer}>
-                    <Text style={styleConfigScreen.sexLabel}>Sexo</Text>
 
                     <View style={styleConfigScreen.checkboxContainer}>
-                        {/* Opção Masculino */}
-                        <TouchableOpacity
-                            onPress={() => setSex("Masculino")}
-                            style={styleConfigScreen.checkboxOption}
-                        >
-                            <View style={[styleConfigScreen.checkbox, sex === "Masculino" && styleConfigScreen.checkboxSelected]}>
-                                {sex === "Masculino" && <View style={styleConfigScreen.checkboxInner} />}
-                            </View>
-                            <Text>Masculino</Text>
-                        </TouchableOpacity>
-
-                        {/* Opção Feminino */}
-                        <TouchableOpacity
-                            onPress={() => setSex("Feminino")}
-                            style={styleConfigScreen.checkboxOption}
-                        >
-                            <View style={[styleConfigScreen.checkbox, sex === "Feminino" && styleConfigScreen.checkboxSelected]}>
-                                {sex === "Feminino" && <View style={styleConfigScreen.checkboxInner} />}
-                            </View>
-                            <Text>Feminino</Text>
-                        </TouchableOpacity>
+                        <CheckBox selected={sex} value="Masculino" onPress={setSex} />
+                        <CheckBox selected={sex} value="Feminino" onPress={setSex} />
                     </View>
                 </View>
                 <InputComponent
                     placeholder="Email"
                     value={email}
-                    icon={require("@/assets/password.png")}
                     onChangeText={setEmail}
                     keyboardType="email-address"
                     autoCapitalize="none"
@@ -75,19 +54,16 @@ const ConfigScreen = () => {
                 <InputComponent
                     placeholder="Telefone"
                     value={phone}
-                    icon={require("@/assets/password.png")}
                     onChangeText={setPhone}
                     keyboardType="phone-pad"
                     autoCapitalize="none"
                 />
 
-                {/* Criar Compoente */}
                 <InputComponent
-                    placeholder="Telefone"
+                    placeholder="Descrição"
                     value={phone}
-                    icon={require("@/assets/password.png")}
                     onChangeText={setPhone}
-                    keyboardType="phone-pad"
+                    keyboardType="default"
                     autoCapitalize="none"
                     style={{ height: 100 }}
                 />

@@ -16,15 +16,18 @@ const styleConfigScreen = StyleSheet.create({
     },
     footer: {
         width: '80%',
+        flexDirection: 'column',
+        justifyContent: 'center',
         display: 'flex',
     },
     sexContainer: {
-        backgroundColor: "#F5F5F5", // Cor de fundo igual aos inputs
+        backgroundColor: "#FBFBFB", // Cor de fundo igual aos inputs
         borderRadius: 8,
-        padding: 12,
+        width: "98%",
+        padding: 10,
+        marginTop: 5,
         borderWidth: 1, 
-        borderColor: "#E0E0E0",
-        marginTop: 10,
+        borderColor: "#499CFA",
         position: "relative",
     },
     sexLabel: {
@@ -34,7 +37,6 @@ const styleConfigScreen = StyleSheet.create({
         backgroundColor: "#F5F5F5", // Mesma cor do fundo para "sobrepor"
         borderRadius: 4,
         paddingHorizontal: 5,
-        
         opacity: 0.8,
         fontSize: 14,
         color: "#333",
