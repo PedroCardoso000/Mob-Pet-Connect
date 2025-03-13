@@ -1,9 +1,9 @@
-import { TextInput, View, Text } from "react-native";
-import React, { useState } from "react";
-import { registerStyles } from "../register-style";
 import { Errors } from "@/@types/Errors";
 import { FormData } from "@/@types/FormData";
 import InputComponent from "@/src/components/InputConnect";
+import React, { useState } from "react";
+import { Text, View } from "react-native";
+import { registerStyles } from "../register-style";
 
 const StepOneScreenRegister = () => {
     const [errors, setErrors] = useState<Errors>({});
