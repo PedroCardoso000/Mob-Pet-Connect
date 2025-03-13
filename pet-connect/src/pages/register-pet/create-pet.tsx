@@ -109,7 +109,7 @@ const CreatePet = () => {
 
             {/* ✅ Avatar do Pet */}
             <View style={styleRegister.avatarContainer}>
-                <Image source={require("./assets/default-pet-avatar.png")} style={styleRegister.avatar} />
+                <Image source={require("")} style={styleRegister.avatar} />
                 <TouchableOpacity style={styleRegister.avatarButton}>
                     <Text style={styleRegister.avatarButtonText}>+</Text>
                 </TouchableOpacity>
