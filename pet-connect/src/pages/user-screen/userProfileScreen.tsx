@@ -1,7 +1,7 @@
-import React from 'react'
-import { Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
-import { userScreenStyles } from './user-profile-style';
 import SmallText from '@/src/components/SmallText';
+import React from 'react';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { userScreenStyles } from './user-profile-style';
 const profileData = {
   username: "Kaique Santos",
   profilePic: require("../../../assets/user.png"),
