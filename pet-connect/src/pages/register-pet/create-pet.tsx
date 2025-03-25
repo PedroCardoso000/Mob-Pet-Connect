@@ -107,7 +107,6 @@ const CreatePet = () => {
                 <Text style={styleRegister.title}>Adicione seu bixinho!</Text>
             </View>
 
-            {/* ✅ Avatar do Pet */}
             <View style={styleRegister.avatarContainer}>
                 <Image source={require("")} style={styleRegister.avatar} />
                 <TouchableOpacity style={styleRegister.avatarButton}>
@@ -117,7 +116,6 @@ const CreatePet = () => {
 
             
             <View style={styleRegister.form}>
-                {/* ✅ Nome do Pet */}
                 <View style={styleRegister.inputContainer}>
                     <TextInput
                         style={[styleRegister.input, errors.nome && styleRegister.inputError]}
@@ -128,7 +126,6 @@ const CreatePet = () => {
                     {errors.nome && <Text style={styleRegister.errorText}>{errors.nome}</Text>}
                 </View>
 
-                {/* ✅ Idade do Pet */}
                 <View style={styleRegister.inputContainer}>
                     <TextInput
                         style={[styleRegister.input, errors.idade && styleRegister.inputError]}
@@ -139,7 +136,6 @@ const CreatePet = () => {
                     />
                     {errors.idade && <Text style={styleRegister.errorText}>{errors.idade}</Text>}
                 </View>
-                {/* ✅ Gênero do Pet */}
                 <View style={styleRegister.genderContainer}>
                     <TouchableOpacity
                         style={[styleRegister.genderButton, petData.genero === "macho" && styleRegister.genderButtonActive]}
@@ -162,7 +158,6 @@ const CreatePet = () => {
                 {errors.genero && <Text style={styleRegister.errorText}>{errors.genero}</Text>}
                 
                 
-                {/* ✅ Espécie do Pet */}
                 <View style={styleRegister.inputContainer}>
                     <TouchableOpacity
                         style={[styleRegister.input, styleRegister.selector, errors.especie && styleRegister.inputError]}
@@ -198,7 +193,6 @@ const CreatePet = () => {
                 </View>
                 
 
-                {/* ✅ Peso do Pet */}
                 <View style={styleRegister.inputContainer}>
                     <TextInput
                         style={[styleRegister.input, errors.peso && styleRegister.inputError]}
@@ -211,7 +205,6 @@ const CreatePet = () => {
                 </View>
                 
 
-                {/* ✅ Descrição do Pet */}
                 <View style={styleRegister.inputContainer}>
                     <TextInput
                         style={[styleRegister.input, styleRegister.textArea]}
