@@ -1,3 +1,4 @@
+import ButtonComponent from "@/src/components/ButtonConnect";
 import { useEffect, useState } from "react";
 import {
     Alert,
@@ -13,7 +14,6 @@ import {
 import { styleRegister } from "./dates/create-pet-styles";
 import { especiesData, racasData } from "./dates/dates-pet";
 import { Errors, PetData, Raca } from "./dates/typesPet";
-
 
 const CreatePet = () => {
     const [petData, setPetData] = useState<PetData>({
@@ -216,15 +216,15 @@ const CreatePet = () => {
                     />
                 </View>
             </View>
+            
 
+            {/* ✅ Botões */}
+            
             <View style={styleRegister.buttonContainer}>
-                <TouchableOpacity style={styleRegister.cancelButton}>
-                    <Text style={styleRegister.cancelButtonText}>CANCELAR</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styleRegister.submitButton} onPress={handleSubmit}>
-                    <Text style={styleRegister.submitButtonText}>CONCLUIR</Text>
-                </TouchableOpacity>
+                <ButtonComponent title="Cancelar"/>
+                <ButtonComponent title="Concluir" onPress={handleSubmit}/>
             </View>
+
 
             <Modal
                 visible={especieModalVisible}
