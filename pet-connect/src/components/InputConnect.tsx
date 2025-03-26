@@ -10,13 +10,11 @@ const InputComponent = ({ placeholder, icon, styleInput, ...rest }: InputCompone
   return (
     <View style={{
       flexDirection: "row",
-      backgroundColor: "#FBFBFB",
+      backgroundColor: "#F5F5F7",
       alignItems: "center",
-      borderWidth: 1,
       borderRadius: 8,
       margin: 5,
       padding: 5,
-      borderColor: "#499CFA",
       ...styleInput
     }}
     >
