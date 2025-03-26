@@ -8,20 +8,21 @@ type InputComponentProps = {
 
 const InputComponent = ({ placeholder, icon, styleInput, ...rest }: InputComponentProps) => {
   return (
-    <View style={{ 
-      flexDirection: "row", 
-      backgroundColor: "#FBFBFB" , 
-      alignItems: "center", 
-      borderWidth: 1, 
+    <View style={{
+      flexDirection: "row",
+      backgroundColor: "#FBFBFB",
+      alignItems: "center",
+      borderWidth: 1,
       borderRadius: 8,
-      margin: 5, 
+      margin: 5,
       padding: 5,
       borderColor: "#499CFA",
-      ...styleInput}}
-      >
+      ...styleInput
+    }}
+    >
 
       <Image
-        source={icon} 
+        source={icon}
         style={{ marginRight: 8, width: 20, height: 20 }}
         resizeMode="contain"
       />

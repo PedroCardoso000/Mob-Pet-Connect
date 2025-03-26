@@ -3,6 +3,7 @@ import styleConfigScreen from "./configScreen-style";
 import InputComponent from "@/src/components/InputConnect";
 import React, { useState } from "react";
 import CheckBox from "@/src/components/CheckBox";
+import ButtonComponent from "@/src/components/ButtonConnect";
 
 const ConfigScreen = () => {
     const [name, setName] = useState<string>('');
@@ -68,6 +69,9 @@ const ConfigScreen = () => {
                     style={{ height: 100 }}
                 />
 
+            </View>
+            <View>
+                <ButtonComponent buttonStyle={styleConfigScreen.buttonSave}  title="Salvar" />
             </View>
         </View>
     );

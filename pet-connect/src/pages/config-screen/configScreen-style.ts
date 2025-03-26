@@ -21,7 +21,7 @@ const styleConfigScreen = StyleSheet.create({
         display: 'flex',
     },
     sexContainer: {
-        backgroundColor: "#FBFBFB", // Cor de fundo igual aos inputs
+        backgroundColor: "#FBFBFB", 
         borderRadius: 8,
         width: "98%",
         padding: 10,
@@ -74,6 +74,10 @@ const styleConfigScreen = StyleSheet.create({
         backgroundColor: "#499CFA", // Azul quando marcado
         borderRadius: 2,
     },
+    buttonSave: {
+        marginTop: 10,
+        width: 120
+    }
 });
 
 export default styleConfigScreen;
