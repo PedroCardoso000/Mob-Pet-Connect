@@ -6,7 +6,7 @@ import {ContactList} from "./src/pages/contactList/index";
 import CreatePet  from "./src/pages/register-pet/create-pet";
 export default function App() {
   return (
-    <ConfigScreen />
+    <CreatePet />
   );
 }
 

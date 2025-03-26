@@ -5,6 +5,7 @@ export const styleRegister = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: "#fff",
+      marginTop: 24,
     },
     header: {
       flexDirection: "row",

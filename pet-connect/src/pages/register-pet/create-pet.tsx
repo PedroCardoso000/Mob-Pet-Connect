@@ -102,12 +102,6 @@ const CreatePet = () => {
 
     return (
         <ScrollView style={styleRegister.container}>
-            <View style={styleRegister.header}>
-                <TouchableOpacity style={styleRegister.backButton}>
-                    <Text style={styleRegister.backButtonText}>Retorne</Text>
-                </TouchableOpacity>
-                <Text style={styleRegister.title}>Adicione seu bixinho!</Text>
-            </View>
 
             <View style={styleRegister.avatarContainer}>
                 <Image source={require("")} style={styleRegister.avatar} />
