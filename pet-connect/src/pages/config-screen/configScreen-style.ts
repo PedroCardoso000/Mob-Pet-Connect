@@ -8,11 +8,11 @@ const styleConfigScreen = StyleSheet.create({
         backgroundColor: "#fff",
     },
     header: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 20,
-        marginBottom: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: "#e1e1e1",
     },
     footer: {
         width: '75%',
@@ -67,6 +67,34 @@ const styleConfigScreen = StyleSheet.create({
         marginTop: 10,
         width: 120,
     },
+    // Header 
+
+      avatarContainer: {
+        alignItems: "center",
+        marginVertical: 20,
+      },
+      avatar: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: "#e1e1e1",
+      },
+      avatarButton: {
+        position: "absolute",
+        bottom: 0,
+        right: "0%",
+        backgroundColor: "#007AFF",
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      avatarButtonText: {
+        color: "#fff",
+        fontSize: 20,
+        fontWeight: "bold",
+      },
 });
 
 export default styleConfigScreen;

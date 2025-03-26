@@ -14,6 +14,7 @@ import {
 import { styleRegister } from "./dates/create-pet-styles";
 import { especiesData, racasData } from "./dates/dates-pet";
 import { Errors, PetData, Raca } from "./dates/typesPet";
+import CheckBox from "@/src/components/CheckBox";
 
 const CreatePet = () => {
     const [petData, setPetData] = useState<PetData>({
@@ -32,6 +33,7 @@ const CreatePet = () => {
     const [especieModalVisible, setEspecieModalVisible] = useState(false);
     const [racaModalVisible, setRacaModalVisible] = useState(false);
     const [racasDisponiveis, setRacasDisponiveis] = useState<Raca[]>([])
+  const [sex, setSex] = useState<string>('');
 
     useEffect(() => {
         if (petData.especieId) {
@@ -136,24 +138,9 @@ const CreatePet = () => {
                     />
                     {errors.idade && <Text style={styleRegister.errorText}>{errors.idade}</Text>}
                 </View>
-                <View style={styleRegister.genderContainer}>
-                    <TouchableOpacity
-                        style={[styleRegister.genderButton, petData.genero === "macho" && styleRegister.genderButtonActive]}
-                        onPress={() => setPetData({ ...petData, genero: "macho" })}
-                    >
-                        <Text style={[styleRegister.genderButtonText, petData.genero === "macho" && styleRegister.genderButtonTextActive]}>
-                            Macho
-                        </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={[styleRegister.genderButton, petData.genero === "femea" && styleRegister.genderButtonActive]}
-                        onPress={() => setPetData({ ...petData, genero: "femea" })}
-                    >
-                        <Text style={[styleRegister.genderButtonText, petData.genero === "femea" && styleRegister.genderButtonTextActive]}>
-                            Fêmea
-                        </Text>
-                    </TouchableOpacity>
+                <View style={styleRegister.checkboxContainer}>
+                    <CheckBox selected={sex} value="Masculino" onPress={setSex} />
+                    <CheckBox selected={sex} value="Feminino" onPress={setSex} />
                 </View>
                 {errors.genero && <Text style={styleRegister.errorText}>{errors.genero}</Text>}
                 

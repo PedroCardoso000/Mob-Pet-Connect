@@ -16,6 +16,13 @@ export const styleRegister = StyleSheet.create({
     backButton: {
       padding: 8,
     },
+    checkboxContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-around", // Para distribuir os checkboxes uniformemente
+      width: "100%",
+      marginVertical: 10,
+  },
     backButtonText: {
       fontSize: 24,
       color: "#666",
