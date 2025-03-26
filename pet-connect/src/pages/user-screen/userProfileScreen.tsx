@@ -41,7 +41,6 @@ const UserProfileScreen = () => {
       </View>
 
 
-      {/* ✅ BIO */}
       <View style={userScreenStyles.textContainer}>
         <Text style={userScreenStyles.bio}>{profileData.bio}</Text>
         <SmallText>{profileData.description}</SmallText>
