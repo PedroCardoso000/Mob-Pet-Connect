@@ -37,12 +37,9 @@ const ConfigScreen = () => {
                 />
 
 
-                <View style={styleConfigScreen.sexContainer}>
-
-                    <View style={styleConfigScreen.checkboxContainer}>
-                        <CheckBox selected={sex} value="Masculino" onPress={setSex} />
-                        <CheckBox selected={sex} value="Feminino" onPress={setSex} />
-                    </View>
+                <View style={styleConfigScreen.checkboxContainer}>
+                    <CheckBox selected={sex} value="Masculino" onPress={setSex} />
+                    <CheckBox selected={sex} value="Feminino" onPress={setSex} />
                 </View>
                 <InputComponent
                     placeholder="Email"
@@ -71,7 +68,7 @@ const ConfigScreen = () => {
 
             </View>
             <View>
-                <ButtonComponent buttonStyle={styleConfigScreen.buttonSave}  title="Salvar" />
+                <ButtonComponent buttonStyle={styleConfigScreen.buttonSave} title="Salvar" />
             </View>
         </View>
     );
