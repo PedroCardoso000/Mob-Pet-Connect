@@ -1,5 +1,5 @@
-import { Image } from "react-native"
-import { StyleSheet, View,  Dimensions,  Text } from "react-native";
+import { Pet } from "@/@types/Pet";
+import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
 const exampleDog = require("@/assets/ex-dog.jpg");
 
