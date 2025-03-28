@@ -1,6 +1,6 @@
 import { Contact } from "@/@types/Contact";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ContactView } from "./ContactView";
+import { ContactView } from "../../components/ContactView";
 import { width } from "@/src/utils/width"
 
 const mockContacts: Contact[] = [
