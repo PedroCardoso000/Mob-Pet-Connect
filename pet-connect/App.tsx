@@ -8,7 +8,7 @@ import FriendViewScreen from "./src/pages/friend-view-screen/friend-view-screen"
 
 export default function App() {
   return (
-    <FriendViewScreen/>
+    <CreatePet />
   );
 }
 
