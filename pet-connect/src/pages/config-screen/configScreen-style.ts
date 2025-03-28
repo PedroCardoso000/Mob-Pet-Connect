@@ -8,47 +8,36 @@ const styleConfigScreen = StyleSheet.create({
         backgroundColor: "#fff",
     },
     header: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 20,
-        marginBottom: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        padding: 16,
+        borderBottomWidth: 1,
+        borderBottomColor: "#e1e1e1",
     },
     footer: {
-        width: '80%',
+        width: '75%',
         flexDirection: 'column',
         justifyContent: 'center',
         display: 'flex',
     },
     sexContainer: {
-        backgroundColor: "#FBFBFB", 
+        width: '100%', // Agora ocupa a mesma largura dos inputs
+        backgroundColor: "#F5F5F7", 
         borderRadius: 8,
-        width: "98%",
-        padding: 10,
         marginTop: 5,
-        borderWidth: 1, 
-        borderColor: "#499CFA",
-        position: "relative",
-    },
-    sexLabel: {
-        position: "absolute",
-        top: -10,
-        left: 10,
-        backgroundColor: "#F5F5F5", // Mesma cor do fundo para "sobrepor"
-        borderRadius: 4,
-        paddingHorizontal: 5,
-        opacity: 0.8,
-        fontSize: 14,
-        color: "#333",
+        borderColor: "#F5F5F7",
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingVertical: 10,
+        paddingHorizontal: 10, // Adicionado para espaçamento interno
     },
     checkboxContainer: {
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-between",
-        marginTop: 10,
-        backgroundColor: "#F5F5F5" , 
-        borderRadius: 8,
-        borderColor: "#E0E0E0",
+        justifyContent: "space-around", // Para distribuir os checkboxes uniformemente
+        width: "100%",
+        marginVertical: 10,
     },
     checkboxOption: {
         flexDirection: "row",
@@ -59,7 +48,7 @@ const styleConfigScreen = StyleSheet.create({
         height: 20,
         borderRadius: 4,
         borderWidth: 2,
-        borderColor: "#499CFA", // Cor azul personalizada
+        borderColor: "#499CFA",
         justifyContent: "center",
         alignItems: "center",
         marginRight: 8,
@@ -71,13 +60,41 @@ const styleConfigScreen = StyleSheet.create({
         width: 12,
         height: 12,
         opacity: 0.8,
-        backgroundColor: "#499CFA", // Azul quando marcado
+        backgroundColor: "#499CFA",
         borderRadius: 2,
     },
     buttonSave: {
         marginTop: 10,
-        width: 120
-    }
+        width: 120,
+    },
+    // Header 
+
+      avatarContainer: {
+        alignItems: "center",
+        marginVertical: 20,
+      },
+      avatar: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+        backgroundColor: "#e1e1e1",
+      },
+      avatarButton: {
+        position: "absolute",
+        bottom: 0,
+        right: "0%",
+        backgroundColor: "#007AFF",
+        width: 30,
+        height: 30,
+        borderRadius: 15,
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      avatarButtonText: {
+        color: "#fff",
+        fontSize: 20,
+        fontWeight: "bold",
+      },
 });
 
 export default styleConfigScreen;
