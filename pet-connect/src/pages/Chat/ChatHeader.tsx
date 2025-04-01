@@ -2,6 +2,7 @@ import { ContactView } from "@/src/components/ContactView"
 import { View, StyleSheet, TouchableOpacity, StatusBar } from "react-native"
 import AntDesign from "@expo/vector-icons/AntDesign"
 import { width } from "@/src/utils/width"
+import { navigate } from "@/src/navigator/app_navigator"
 
 const styles = StyleSheet.create({
   container: {
@@ -36,7 +37,7 @@ export function ChatHeader() {
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <View style={styles.container}>
         <View style={styles.leftSection}>
-          <TouchableOpacity>
+          <TouchableOpacity onPressOut={() => navigate("Contact_List")}>
             <AntDesign name="arrowleft" size={24} color="black" />
           </TouchableOpacity>
         </View>

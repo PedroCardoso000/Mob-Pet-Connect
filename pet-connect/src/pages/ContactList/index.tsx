@@ -47,7 +47,13 @@ export function ContactList() {
   return (
     <ScrollView style={style.scrollView}>
       <View style={style.view}>
-        {mockContacts.map((contact, index) => <ContactView key={index} contact={contact}/>)}
+        {
+          mockContacts.map((contact, index) => 
+            <ContactView
+            key={index} 
+            contact={contact}/>
+          )
+        }
       </View>
     </ScrollView>
   )

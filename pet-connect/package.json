@@ -32,6 +32,7 @@
     "react-native-css-interop": "^0.1.22",
     "react-native-reanimated": "^3.17.0",
     "react-native-safe-area-context": "^5.2.0",
+    "react-native-screens": "^4.10.0",
     "react-native-svg": "^15.2.0",
     "react-native-web": "~0.19.13",
     "react-navigation": "^5.0.0",
