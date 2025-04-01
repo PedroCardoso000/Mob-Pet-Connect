@@ -3,6 +3,7 @@ import React from "react";
 import { TouchableOpacity, View, StyleSheet } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
+
 const styles = StyleSheet.create({
   inputContainer: {
     height: 72,

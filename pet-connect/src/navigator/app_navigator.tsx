@@ -1,8 +1,9 @@
 import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import RegisterScreen from '../pages/register/register';
 import { ContactList } from '../pages/ContactList';
 import { Chat } from '../pages/Chat';
+import { Footer } from '../components/Footer';
+import { Layout } from '../components/Layout';
 
 const Stack = createNativeStackNavigator();
 
@@ -28,12 +29,12 @@ export function navigate<T extends keyof RootStackParamList>(
 const AppNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>
-      <Stack.Navigator initialRouteName="Register">
-        {/* <Stack.Screen 
-          name="Register" 
-          component={RegisterScreen}
+      <Stack.Navigator initialRouteName="Layout">
+      <Stack.Screen 
+          name="Layout" 
+          component={Layout}
           options={{ headerShown: false }}
-        /> */}
+        />
         <Stack.Screen 
           name="Contact_List" 
           component={ContactList}
