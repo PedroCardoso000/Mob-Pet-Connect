@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const TOKEN_KEY = 'auth_token';
+const TOKEN_KEY = '$2a$10$JCcTh6cFhNR4KphocFPmSuLjanLrhIJGCGL5I9aWXHOF6kP0l3ejW';
 
 export const getToken = async (): Promise<string | null> => {
   try {

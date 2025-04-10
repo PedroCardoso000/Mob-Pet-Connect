@@ -19,12 +19,10 @@ import CheckBox from "@/src/components/CheckBox";
 const CreatePet = () => {
     const [petData, setPetData] = useState<PetData>({
         nome: "",
-        idade: "",
         especieId: "",
         especieNome: "",
         racaId: "",
         racaNome: "",
-        peso: "",
         descricao: "",
         genero: ""
     })
@@ -33,7 +31,7 @@ const CreatePet = () => {
     const [especieModalVisible, setEspecieModalVisible] = useState(false);
     const [racaModalVisible, setRacaModalVisible] = useState(false);
     const [racasDisponiveis, setRacasDisponiveis] = useState<Raca[]>([])
-  const [sex, setSex] = useState<string>('');
+     const [sex, setSex] = useState<string>('');
 
     useEffect(() => {
         if (petData.especieId) {
@@ -50,16 +48,8 @@ const CreatePet = () => {
             newErrors.nome = "Nome do Pet é obrigatório";
         }
 
-        if (!petData.idade.trim()) {
-            newErrors.idade = "Idade do seu Pet é obrigatória"
-        }
-
         if (!petData.especieId) {
             newErrors.especie = "Selecione a Espécie do Pet"
-        }
-
-        if (!petData.peso.trim()) {
-            newErrors.peso = "O peso do seu Pet é obrigatória"
         }
 
         if (!petData.genero) {
@@ -100,6 +90,13 @@ const CreatePet = () => {
         setRacaModalVisible(false)
     }
 
+
+    /* Inserindo Pet */
+
+    async function postPeet() {
+        
+    }
+
     return (
         <ScrollView style={styleRegister.container}>
 
@@ -122,16 +119,6 @@ const CreatePet = () => {
                     {errors.nome && <Text style={styleRegister.errorText}>{errors.nome}</Text>}
                 </View>
 
-                <View style={styleRegister.inputContainer}>
-                    <TextInput
-                        style={[styleRegister.input, errors.idade && styleRegister.inputError]}
-                        placeholder="Idade"
-                        value={petData.idade}
-                        onChangeText={(text) => setPetData({ ...petData, idade: text })}
-                        keyboardType="numeric"
-                    />
-                    {errors.idade && <Text style={styleRegister.errorText}>{errors.idade}</Text>}
-                </View>
                 <View style={styleRegister.checkboxContainer}>
                     <CheckBox selected={sex} value="Masculino" onPress={setSex} />
                     <CheckBox selected={sex} value="Feminino" onPress={setSex} />
@@ -172,18 +159,7 @@ const CreatePet = () => {
                     </TouchableOpacity>
                     {errors.raca && <Text style={styleRegister.errorText}>{errors.raca}</Text>}
                 </View>
-                
-
-                <View style={styleRegister.inputContainer}>
-                    <TextInput
-                        style={[styleRegister.input, errors.peso && styleRegister.inputError]}
-                        placeholder="Peso (kg)"
-                        value={petData.peso}
-                        onChangeText={(text) => setPetData({ ...petData, peso: text })}
-                        keyboardType="numeric"
-                    />
-                    {errors.peso && <Text style={styleRegister.errorText}>{errors.peso}</Text>}
-                </View>
+            
                 
 
                 <View style={styleRegister.inputContainer}>

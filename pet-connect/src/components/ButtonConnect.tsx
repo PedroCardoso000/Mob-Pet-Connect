@@ -10,7 +10,9 @@ type ButtonComponentProps = {
 
 const ButtonComponent = ({ title, onPress, buttonStyle, textStyle }: ButtonComponentProps) => {
   return (
-    <TouchableOpacity onPress={onPress} style={[styles.button, buttonStyle]}>
+    <TouchableOpacity onPress={() => {
+      if (onPress) onPress();
+    }} style={[styles.button, buttonStyle]}>
       <Text style={[styles.text, textStyle]}>{title}</Text>
     </TouchableOpacity>
   );
