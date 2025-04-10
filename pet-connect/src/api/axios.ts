@@ -3,7 +3,7 @@ import { getToken } from "../service/tokenService";
 
 export const api = axios.create({
   // baseURL: "https://petconnectbackend-r2ldr42g.b4a.run/", // URL DA API
-  baseURL: "http://localhost:8080/",
+  baseURL: " http://192.168.15.9:8080/",
   headers: {
     "Content-Type": "application/json",
   },

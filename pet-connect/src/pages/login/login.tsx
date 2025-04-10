@@ -16,37 +16,34 @@ const LoginScreen = () => {
 
 
   async function handleLogin(email: string, password: string) {
+    const token = await getToken();
     try {
       if (email && password) {
         setIsLoading(true);
-  
-        const response = await axios.post(
-          'http://192.168.15.9:8080/auth/login',
+
+        const response = await api.post(
+          '/auth/login',
           { email, password },
           {
             headers: {
-              'Content-Type': 'application/json',
-              'Authorization':
-                'Bearer $2a$10$JCcTh6cFhNR4KphocFPmSuLjanLrhIJGCGL5I9aWXHOF6kP0l3ejW',
+              Authorization: `Bearer ${token}`,
+
             },
-            withCredentials: true,
           }
         );
-  
+
         if (response.status === HttpStatusCode.Ok) {
           setError(true);
         }
-  
-        console.log('Login realizado com sucesso!', response.data);
       } else {
+        console.warn('Preencha todos os campos!', token);
       }
     } catch (error) {
-      console.error("Erorr")
+      console.error('Erro ao fazer login:', token);
     } finally {
       setIsLoading(false);
     }
   }
-
 
 
 
