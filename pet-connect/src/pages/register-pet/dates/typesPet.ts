@@ -15,12 +15,10 @@ export type Especie = {
 
 export interface PetData {
     nome: string
-    idade: string
     especieId: string
     especieNome: string
     racaId: string
     racaNome: string
-    peso: string
     descricao: string
     genero: "macho" | "femea" | ""
 }
