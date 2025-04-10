@@ -1,6 +1,6 @@
 import { createNavigationContainerRef, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { ContactList } from '../pages/contactList';
+import { ContactList } from '../pages/ContactList';
 import { Chat } from '../pages/Chat';
 import { Footer } from '../components/Footer';
 import { Layout } from '../components/Layout';
