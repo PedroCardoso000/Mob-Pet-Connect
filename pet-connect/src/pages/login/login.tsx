@@ -7,7 +7,6 @@ import { api } from '@/src/api/axios';
 import Toast from 'react-native-toast-message';
 import { getToken } from '@/src/service/tokenService';
 import { HttpStatusCode } from 'axios';
-import axios from 'axios';
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,16 +19,9 @@ const LoginScreen = () => {
     try {
       if (email && password) {
         setIsLoading(true);
-
         const response = await api.post(
           '/auth/login',
           { email, password },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-
-            },
-          }
         );
 
         if (response.status === HttpStatusCode.Ok) {

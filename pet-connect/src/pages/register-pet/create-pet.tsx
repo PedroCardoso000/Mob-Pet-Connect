@@ -15,6 +15,8 @@ import { styleRegister } from "./dates/create-pet-styles";
 import { especiesData, racasData } from "./dates/dates-pet";
 import { Errors, PetData, Raca } from "./dates/typesPet";
 import CheckBox from "@/src/components/CheckBox";
+import { HttpStatusCode } from "axios";
+import { api } from "@/src/api/axios";
 
 const CreatePet = () => {
     const [petData, setPetData] = useState<PetData>({
@@ -31,7 +33,7 @@ const CreatePet = () => {
     const [especieModalVisible, setEspecieModalVisible] = useState(false);
     const [racaModalVisible, setRacaModalVisible] = useState(false);
     const [racasDisponiveis, setRacasDisponiveis] = useState<Raca[]>([])
-     const [sex, setSex] = useState<string>('');
+    const [sex, setSex] = useState<string>('');
 
     useEffect(() => {
         if (petData.especieId) {
@@ -94,7 +96,24 @@ const CreatePet = () => {
     /* Inserindo Pet */
 
     async function postPeet() {
-        
+        try {
+            const response = await api.post('/pet', {
+                name: petData.nome,
+                gender: "MALE",
+                birthDate: new Date(),
+                specie: petData.especieNome,
+                race: petData.racaNome
+            });
+
+            if (response.status === HttpStatusCode.Ok) {
+                console.info('Pet cadastrado com sucesso!');
+                console.log(response.data);
+            }
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+        }
+
+        console.log(petData.genero);
     }
 
     return (
@@ -107,7 +126,7 @@ const CreatePet = () => {
                 </TouchableOpacity>
             </View>
 
-            
+
             <View style={styleRegister.form}>
                 <View style={styleRegister.inputContainer}>
                     <TextInput
@@ -120,12 +139,12 @@ const CreatePet = () => {
                 </View>
 
                 <View style={styleRegister.checkboxContainer}>
-                    <CheckBox selected={sex} value="Masculino" onPress={setSex} />
-                    <CheckBox selected={sex} value="Feminino" onPress={setSex} />
+                    <CheckBox selected={sex} value={"Masculino"} onPress={() => setSex("MALE")} />
+                    <CheckBox selected={sex} value={"Feminino"} onPress={() => setSex("FEMALE")} />
                 </View>
                 {errors.genero && <Text style={styleRegister.errorText}>{errors.genero}</Text>}
-                
-                
+
+
                 <View style={styleRegister.inputContainer}>
                     <TouchableOpacity
                         style={[styleRegister.input, styleRegister.selector, errors.especie && styleRegister.inputError]}
@@ -140,7 +159,7 @@ const CreatePet = () => {
                 </View>
 
 
-                
+
                 <View style={styleRegister.inputContainer}>
                     <TouchableOpacity
                         style={[styleRegister.input, styleRegister.selector, errors.raca && styleRegister.inputError]}
@@ -159,8 +178,8 @@ const CreatePet = () => {
                     </TouchableOpacity>
                     {errors.raca && <Text style={styleRegister.errorText}>{errors.raca}</Text>}
                 </View>
-            
-                
+
+
 
                 <View style={styleRegister.inputContainer}>
                     <TextInput
@@ -173,13 +192,13 @@ const CreatePet = () => {
                     />
                 </View>
             </View>
-            
+
 
             {/* ✅ Botões */}
-            
+
             <View style={styleRegister.buttonContainer}>
-                <ButtonComponent title="Cancelar"/>
-                <ButtonComponent title="Concluir" onPress={handleSubmit}/>
+                <ButtonComponent title="Cancelar" />
+                <ButtonComponent title="Concluir" onPress={postPeet} />
             </View>
 
 
