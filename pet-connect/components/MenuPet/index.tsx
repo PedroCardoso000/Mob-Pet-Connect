@@ -1,7 +1,7 @@
 import { Pet } from "@/@types/Pet";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
-const exampleDog = require("@/assets/ex-dog.jpg");
+const exampleDog = require("@/assets/dog.jpg");
 
 const style = StyleSheet.create({
   image: {
@@ -34,7 +34,7 @@ export function MenuPet({pet}: Props) {
           borderRadius={4}      
         />
         <View style={style.imageTextView}>
-          <Text>{pet.name} (M)</Text>
+          <Text>{pet.name} ({pet.gender === "FEMALE" ? "F" : "M"})</Text>
           <Text>{pet.race}</Text>
         </View>
     </View>

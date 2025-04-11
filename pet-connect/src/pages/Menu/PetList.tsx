@@ -19,24 +19,16 @@ const style = StyleSheet.create({
   
 })
 
-const mockPets = [
-  { name: "Buddy", race: "Golden Retriever", gender: "M" },
-  { name: "Bella", race: "Golden Retriever", gender: "F" },
-  { name: "Max", race: "Golden Retriever", gender: "M" },
-  { name: "Lucy", race: "Golden Retriever", gender: "F" },
-  { name: "Charlie", race: "Golden Retriever", gender: "M" },
-  { name: "Daisy", race: "Golden Retriever", gender: "F" },
-  { name: "Rocky", race: "Golden Retriever", gender: "M" },
-  { name: "Molly", race: "Golden Retriever", gender: "F" },
-  { name: "Jake", race: "Golden Retriever", gender: "M" },
-  { name: "Sadie", race: "Golden Retriever", gender: "F" }
-] as Pet[];
 
-export function PetList() {
+type Props = {
+  pets: Pet[]
+}
+
+export function PetList({pets}: Props) {
   return (
     <ScrollView style={style.scrollView}>
       <View style={style.petList}>
-        {mockPets.map((pet, idx) => <MenuPet  key={idx} pet={pet}/>)}
+        {pets.map((pet, idx) => <MenuPet  key={idx} pet={pet}/>)}
       </View>
     </ScrollView>
   )
