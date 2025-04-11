@@ -1,5 +1,5 @@
 export type Pet = {
   name: string,
-  gender: "M" | "F",
+  gender: "MALE" | "FEMALE",
   race: string
 }
