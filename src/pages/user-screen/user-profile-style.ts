@@ -7,6 +7,12 @@ const scaleSize = (size: any) => (size / 375) * width; // 375px é o tamanho pad
 const scaleFont = (size : any) => size * PixelRatio.getFontScale();
 
 export const userScreenStyles = StyleSheet.create({
+
+  safeArea:  {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+
   container: {
     flex: 1,
     padding: 50,

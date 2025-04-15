@@ -1,6 +1,6 @@
 import SmallText from '@/src/components/SmallText';
 import React from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View, SafeAreaView,StatusBar } from 'react-native';
 import { userScreenStyles } from './user-profile-style';
 import { Header } from '@/src/components/Header';
 import { Footer } from '@/src/components/Footer';
@@ -29,59 +29,60 @@ const profileData = {
 
 const UserProfileScreen = () => {
   return (
-    <View style={userScreenStyles.container}>
-      {/* ✅ HEADER */}
-    <Header/>
-      <View style={userScreenStyles.header}>
-        <Image source={profileData.profilePic} style={userScreenStyles.profilePic} />
-        <View style={userScreenStyles.userInfo}>
-          <Text style={userScreenStyles.username}>{profileData.username}</Text>
-          <View style={userScreenStyles.formrow}>
-            <View style={userScreenStyles.statusUser}>
+    <SafeAreaView style={userScreenStyles.safeArea}>
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
+      
+      <Header/>
+      
+      <View style={[userScreenStyles.container, { marginTop: 90 }]}>
+        <View style={userScreenStyles.header}>
+          <Image source={profileData.profilePic} style={userScreenStyles.profilePic} />
+          <View style={userScreenStyles.userInfo}>
+            <Text style={userScreenStyles.username}>{profileData.username}</Text>
+            <View style={userScreenStyles.formrow}>
+              <View style={userScreenStyles.statusUser}>
+              </View>
+              <SmallText>Disponivel</SmallText>
             </View>
-            <SmallText>Disponivel</SmallText>
           </View>
         </View>
 
-      </View>
-
-
-      <View style={userScreenStyles.textContainer}>
-        <Text style={userScreenStyles.bio}>{profileData.bio}</Text>
-        <SmallText>{profileData.description}</SmallText>
-      </View>
-
-      {/* ✅ STATS */}
-      <View style={userScreenStyles.statsRow}>
-
-        <View style={userScreenStyles.statButton}>
-          <SmallText>Adicionar mais Pets</SmallText>
-          <TouchableOpacity style={userScreenStyles.editButton}>
-            <Image
-              source={require('../../../assets/addPet.png')}
-              style={{ width: 20, height: 20, borderColor: 'none' }}
-            />
-          </TouchableOpacity>
+        <View style={userScreenStyles.textContainer}>
+          <Text style={userScreenStyles.bio}>{profileData.bio}</Text>
+          <SmallText>{profileData.description}</SmallText>
         </View>
-      </View>
 
-      <FlatList
-        numColumns={3}
-        data={profileData.feed}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={userScreenStyles.feedItem}>
-            <Image source={item.image} style={userScreenStyles.feedImage} />
-            <SmallText>Nome: {item.name}</SmallText>
-            <SmallText>Sexo: {item.sex}</SmallText>
+        <View style={userScreenStyles.statsRow}>
+          <View style={userScreenStyles.statButton}>
+            <SmallText>Adicionar mais Pets</SmallText>
+            <TouchableOpacity style={userScreenStyles.editButton}>
+              <Image
+                source={require('../../../assets/addPet.png')}
+                style={{ width: 20, height: 20, borderColor: 'none' }}
+              />
+            </TouchableOpacity>
           </View>
-        )}
-        style={userScreenStyles.feed}
+        </View>
 
-      />
-
-    </View>
-  )
+        <FlatList
+          numColumns={3}
+          data={profileData.feed}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={userScreenStyles.feedItem}>
+              <Image source={item.image} style={userScreenStyles.feedImage} />
+              <SmallText>Nome: {item.name}</SmallText>
+              <SmallText>Sexo: {item.sex}</SmallText>
+            </View>
+          )}
+          style={userScreenStyles.feed}
+          contentContainerStyle={{ paddingBottom: 70 }}
+        />
+      </View>
+      
+      <Footer />
+    </SafeAreaView>
+  );
 };
 
 export default UserProfileScreen;
