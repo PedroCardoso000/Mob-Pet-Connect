@@ -1,0 +1,23 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "outDir": "./build",
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "jsx": "react-native",
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"],
+      "tailwind.config": ["./tailwind.config.js"]
+    }
+  },
+  "include": [
+    "./src",
+    "nativewind-env.d.ts"
+  ],
+  "exclude": [
+    "**/__mocks__/*",
+    "**/__tests__/*",
+    "**/__rsc_tests__/*"
+  ]
+}
