@@ -3,7 +3,7 @@ import { getToken } from "../service/tokenService";
 
 export const api = axios.create({
   // baseURL: "https://petconnectbackend-r2ldr42g.b4a.run/", // URL DA API
-  baseURL: " http://192.168.15.9:8080/",
+  baseURL: "http://192.168.15.4:8080/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -12,8 +12,9 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
+    const token = await getToken();
     if (config.headers) {
-      config.headers["Authorization"] = `Bearer $2a$10$JCcTh6cFhNR4KphocFPmSuLjanLrhIJGCGL5I9aWXHOF6kP0l3ejW`;
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
     return config;
   },

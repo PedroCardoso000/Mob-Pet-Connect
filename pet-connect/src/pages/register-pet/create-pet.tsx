@@ -15,6 +15,8 @@ import { styleRegister } from "./dates/create-pet-styles";
 import { especiesData, racasData } from "./dates/dates-pet";
 import { Errors, PetData, Raca } from "./dates/typesPet";
 import CheckBox from "@/src/components/CheckBox";
+import { HttpStatusCode } from "axios";
+import { api } from "@/src/api/axios";
 
 const CreatePet = () => {
     const [petData, setPetData] = useState<PetData>({
@@ -31,7 +33,8 @@ const CreatePet = () => {
     const [especieModalVisible, setEspecieModalVisible] = useState(false);
     const [racaModalVisible, setRacaModalVisible] = useState(false);
     const [racasDisponiveis, setRacasDisponiveis] = useState<Raca[]>([])
-     const [sex, setSex] = useState<string>('');
+    const [sex, setSex] = useState<string>('');
+    const [response, setReponse] = useState<boolean>(false);
 
     useEffect(() => {
         if (petData.especieId) {
@@ -91,10 +94,26 @@ const CreatePet = () => {
     }
 
 
-    /* Inserindo Pet */
-
     async function postPeet() {
-        
+
+        try {
+            const { status, data } = await api.post('/pet', {
+                name: petData.nome,
+                gender: "Male",
+                birthDate: new Date(),
+                specie: petData.especieNome,
+                race: petData.racaNome
+            });
+
+            if (status === HttpStatusCode.Ok) {
+                setReponse(true)
+                return data;
+            }
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+        }
+
+
     }
 
     return (
@@ -107,7 +126,14 @@ const CreatePet = () => {
                 </TouchableOpacity>
             </View>
 
-            
+            {response &&
+                (
+                    <>
+                        <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Text style={{ fontSize: 15, color: '#499CFA' }}>Pet cadastrado com sucesso!</Text>
+                        </View>
+                    </>)
+            }
             <View style={styleRegister.form}>
                 <View style={styleRegister.inputContainer}>
                     <TextInput
@@ -119,67 +145,69 @@ const CreatePet = () => {
                     {errors.nome && <Text style={styleRegister.errorText}>{errors.nome}</Text>}
                 </View>
 
-                <View style={styleRegister.checkboxContainer}>
-                    <CheckBox selected={sex} value="Masculino" onPress={setSex} />
-                    <CheckBox selected={sex} value="Feminino" onPress={setSex} />
-                </View>
-                {errors.genero && <Text style={styleRegister.errorText}>{errors.genero}</Text>}
-                
-                
-                <View style={styleRegister.inputContainer}>
-                    <TouchableOpacity
-                        style={[styleRegister.input, styleRegister.selector, errors.especie && styleRegister.inputError]}
-                        onPress={() => setEspecieModalVisible(true)}
-                    >
-                        <Text style={petData.especieNome ? styleRegister.selectorTextSelected : styleRegister.selectorText}>
-                            {petData.especieNome || "Espécie"}
-                        </Text>
-                        <Text style={styleRegister.selectorIcon}>▼</Text>
-                    </TouchableOpacity>
-                    {errors.especie && <Text style={styleRegister.errorText}>{errors.especie}</Text>}
-                </View>
+
+                    <View style={styleRegister.checkboxContainer}>
+                        <CheckBox selected={sex} value="MALE" label="Masculino" onPress={setSex} />
+                        <CheckBox selected={sex} value="FEMALE" label="Feminino" onPress={setSex} />
+                    </View>
+
+                    {errors.genero && <Text style={styleRegister.errorText}>{errors.genero}</Text>}
 
 
-                
-                <View style={styleRegister.inputContainer}>
-                    <TouchableOpacity
-                        style={[styleRegister.input, styleRegister.selector, errors.raca && styleRegister.inputError]}
-                        onPress={() => {
-                            if (petData.especieId) {
-                                setRacaModalVisible(true)
-                            } else {
-                                Alert.alert("Atenção", "Selecione uma espécie primeiro")
-                            }
-                        }}
-                    >
-                        <Text style={petData.racaNome ? styleRegister.selectorTextSelected : styleRegister.selectorText}>
-                            {petData.racaNome || "Raça"}
-                        </Text>
-                        <Text style={styleRegister.selectorIcon}>▼</Text>
-                    </TouchableOpacity>
-                    {errors.raca && <Text style={styleRegister.errorText}>{errors.raca}</Text>}
-                </View>
-            
-                
+                    <View style={styleRegister.inputContainer}>
+                        <TouchableOpacity
+                            style={[styleRegister.input, styleRegister.selector, errors.especie && styleRegister.inputError]}
+                            onPress={() => setEspecieModalVisible(true)}
+                        >
+                            <Text style={petData.especieNome ? styleRegister.selectorTextSelected : styleRegister.selectorText}>
+                                {petData.especieNome || "Espécie"}
+                            </Text>
+                            <Text style={styleRegister.selectorIcon}>▼</Text>
+                        </TouchableOpacity>
+                        {errors.especie && <Text style={styleRegister.errorText}>{errors.especie}</Text>}
+                    </View>
 
-                <View style={styleRegister.inputContainer}>
-                    <TextInput
-                        style={[styleRegister.input, styleRegister.textArea]}
-                        placeholder="Descrição"
-                        value={petData.descricao}
-                        onChangeText={(text) => setPetData({ ...petData, descricao: text })}
-                        multiline
-                        numberOfLines={4}
-                    />
-                </View>
+
+
+                    <View style={styleRegister.inputContainer}>
+                        <TouchableOpacity
+                            style={[styleRegister.input, styleRegister.selector, errors.raca && styleRegister.inputError]}
+                            onPress={() => {
+                                if (petData.especieId) {
+                                    setRacaModalVisible(true)
+                                } else {
+                                    Alert.alert("Atenção", "Selecione uma espécie primeiro")
+                                }
+                            }}
+                        >
+                            <Text style={petData.racaNome ? styleRegister.selectorTextSelected : styleRegister.selectorText}>
+                                {petData.racaNome || "Raça"}
+                            </Text>
+                            <Text style={styleRegister.selectorIcon}>▼</Text>
+                        </TouchableOpacity>
+                        {errors.raca && <Text style={styleRegister.errorText}>{errors.raca}</Text>}
+                    </View>
+
+
+
+                    <View style={styleRegister.inputContainer}>
+                        <TextInput
+                            style={[styleRegister.input, styleRegister.textArea]}
+                            placeholder="Descrição"
+                            value={petData.descricao}
+                            onChangeText={(text) => setPetData({ ...petData, descricao: text })}
+                            multiline
+                            numberOfLines={4}
+                        />
+                    </View>
             </View>
-            
+
 
             {/* ✅ Botões */}
-            
+
             <View style={styleRegister.buttonContainer}>
-                <ButtonComponent title="Cancelar"/>
-                <ButtonComponent title="Concluir" onPress={handleSubmit}/>
+                <ButtonComponent title="Concluir" onPress={postPeet} />
+                <ButtonComponent title="Cancelar" />
             </View>
 
 

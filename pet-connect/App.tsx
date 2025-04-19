@@ -11,7 +11,7 @@ import LoginScreen from "./src/pages/login/login";
 export default function App() {
   return (
     <>
-      <LoginScreen />
+      <CreatePet />
     </>
   )
 }
