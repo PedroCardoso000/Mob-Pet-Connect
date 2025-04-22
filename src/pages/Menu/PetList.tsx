@@ -2,6 +2,8 @@ import { MenuPet } from "@/components/MenuPet"
 import { ScrollView, View, StyleSheet, Dimensions } from "react-native"
 import React from "react";
 import { Pet } from "../../../@types/Pet";
+import { Header } from "@/src/components/Header";
+import { Footer } from "@/src/components/Footer";
 
 
 const style = StyleSheet.create({
@@ -35,9 +37,11 @@ const mockPets = [
 export function PetList() {
   return (
     <ScrollView style={style.scrollView}>
+      <Header/>
       <View style={style.petList}>
         {mockPets.map((pet, idx) => <MenuPet  key={idx} pet={pet}/>)}
       </View>
+      <Footer/>
     </ScrollView>
   )
 }

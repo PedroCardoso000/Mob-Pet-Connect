@@ -49,6 +49,7 @@ const style = StyleSheet.create({
 export function ContactList() {
   return (
     <ScrollView style={style.scrollView}>
+      <Header/>
       <View style={style.view}>
         {
           mockContacts.map((contact, index) => 
@@ -58,6 +59,7 @@ export function ContactList() {
           )
         }
       </View>
+      <Footer/>
     </ScrollView>
   )
 }
