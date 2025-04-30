@@ -4,10 +4,8 @@ import { loginstyles } from './login-style';
 import InputComponent from '@/src/components/InputConnect';
 import ButtonComponent from '@/src/components/ButtonConnect';
 import { api } from '@/src/api/axios';
-import Toast from 'react-native-toast-message';
-import { getToken } from '@/src/service/tokenService';
+import { getToken, setToken } from '@/src/service/tokenService';
 import { HttpStatusCode } from 'axios';
-import axios from 'axios';
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,30 +14,25 @@ const LoginScreen = () => {
 
 
   async function handleLogin(email: string, password: string) {
-    const token = await getToken();
+
     try {
       if (email && password) {
         setIsLoading(true);
-
-        const response = await api.post(
+        const { status, data } = await api.post(
           '/auth/login',
           { email, password },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-
-            },
-          }
         );
 
-        if (response.status === HttpStatusCode.Ok) {
+        if (status === HttpStatusCode.Ok) {
+          const token = setToken(data.token);
           setError(true);
+          return data;
         }
       } else {
-        console.warn('Preencha todos os campos!', token);
+        console.warn('Preencha todos os campos!');
       }
     } catch (error) {
-      console.error('Erro ao fazer login:', token);
+      console.error('Erro ao fazer login:');
     } finally {
       setIsLoading(false);
     }

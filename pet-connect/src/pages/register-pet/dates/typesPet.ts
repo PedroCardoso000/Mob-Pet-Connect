@@ -20,7 +20,7 @@ export interface PetData {
     racaId: string
     racaNome: string
     descricao: string
-    genero: "macho" | "femea" | ""
+    genero: "MALE" | "FEMALE" | ""
 }
 
 export interface Errors {

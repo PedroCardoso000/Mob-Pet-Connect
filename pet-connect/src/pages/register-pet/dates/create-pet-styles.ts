@@ -130,6 +130,7 @@ export const styleRegister = StyleSheet.create({
       flexDirection: "row",
       justifyContent: "space-between",
       padding: 16,
+      gap: 5,
       marginTop: "auto",
     },
     cancelButton: {
