@@ -1,6 +1,11 @@
 import type React from "react"
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
+import { usePet } from "./hooks/usePet";
+import { useContext } from "react";
+import { AuthContext } from "@/src/context/AuthContext";
+import { api } from "@/src/api/axios";
+import { navigate } from "@/src/navigator/app_navigator";
 const exampleUser = require("@/assets/user.png");
 const exampleDog = require("@/assets/dog.jpg");
 
@@ -101,19 +106,39 @@ const styles = StyleSheet.create({
   },
 })
 
+type Props = {
+  route: {
+    params: number
+  }
+}
 
-export function PetProfile() {
+
+export default function PetProfile({ route }: Props ) {
+
+  const { userPet } = usePet(route.params);
+
+  const { user } = useContext(AuthContext);
+
+  async function match(sender: number, receiver: number) {
+    try {
+      const { data } = await api.post("/chat-room", {sender, receiver});
+      navigate("Contact_List");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <ScrollView style={styles.container}>
       <Image source={exampleDog} style={styles.petImage} />
       <View style={styles.infoContainer}>
         <View style={styles.nameRow}>
-          <Text style={styles.petName}>Bidu</Text>
+          <Text style={styles.petName}>{userPet?.name}</Text>
           <View style={styles.breedDateContainer}>
-            <Text style={styles.breedText}>Maltês ♂</Text>
+            <Text style={styles.breedText}>{userPet?.race} {userPet?.gender === "MALE" ? "♂" : "♀"}</Text>
             <View style={styles.detailItem}>
               <Ionicons name="calendar-outline" size={18} color="#3498db" />
-              <Text style={styles.detailText}>12/04/22</Text>
+              <Text style={styles.detailText}>{userPet?.birthDate}</Text>
             </View>
           </View>
         </View>
@@ -122,14 +147,16 @@ export function PetProfile() {
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea sunt quam vero cupiditate enim accusamus sed quae velit, sit unde animi, corrupti accusantium amet, inventore eaque. Iste maxime eaque reprehenderit?
         </Text>
   
-        <TouchableOpacity style={styles.matchButton}>
+        <TouchableOpacity
+        style={styles.matchButton}
+        onPressOut={ () => match(user!.id, userPet!.user.id) }>
           <Text style={styles.matchButtonText}>Match</Text>
         </TouchableOpacity>
   
         <View style={styles.ownerContainer}>
           <Image source={exampleUser} style={styles.ownerImage} />
           <View style={styles.ownerInfo}>
-            <Text style={styles.ownerName}>Flávio Santos</Text>
+            <Text style={styles.ownerName}>{userPet?.user.name}</Text>
           </View>
         </View>
       </View>

@@ -1,4 +1,5 @@
-import { Pet } from "@/@types/Pet";
+import { Pet } from "@/src/@types/Pet";
+import { navigate } from "@/src/navigator/app_navigator";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
 const exampleDog = require("@/assets/dog.jpg");
@@ -26,8 +27,9 @@ type Props = {
 }
 
 export function MenuPet({pet}: Props) {
+
   return (
-    <View style={style.view}>  
+    <View style={style.view} onTouchEnd={() => navigate("Pet_Profile", pet.id)}>  
         <Image
           source={exampleDog}
           style={style.image}          

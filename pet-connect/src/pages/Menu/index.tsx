@@ -1,7 +1,7 @@
 import { MenuPet } from "@/components/MenuPet";
 import { PetList } from "./PetList";
 import { useEffect, useState } from "react";
-import { Pet } from "@/@types/Pet";
+import { Pet } from "@/src/@types/Pet";
 import { api } from "@/src/api/axios";
 
 export function Menu() {

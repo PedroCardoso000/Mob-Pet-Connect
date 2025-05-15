@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { loginstyles } from './login-style';
 import InputComponent from '@/src/components/InputConnect';
@@ -6,12 +6,16 @@ import ButtonComponent from '@/src/components/ButtonConnect';
 import { api } from '@/src/api/axios';
 import { getToken, setToken } from '@/src/service/tokenService';
 import { HttpStatusCode } from 'axios';
+import { navigate } from '@/src/navigator/app_navigator';
+import { AuthContext } from '@/src/context/AuthContext';
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  const { getUserByToken } = useContext(AuthContext);
 
   async function handleLogin(email: string, password: string) {
 
@@ -24,15 +28,16 @@ const LoginScreen = () => {
         );
 
         if (status === HttpStatusCode.Ok) {
-          const token = setToken(data.token);
+          await setToken(data.token);
+          await getUserByToken();
           setError(true);
-          return data;
+          navigate("Menu");
         }
       } else {
         console.warn('Preencha todos os campos!');
       }
     } catch (error) {
-      console.error('Erro ao fazer login:');
+      console.error('Erro ao fazer login:', error);
     } finally {
       setIsLoading(false);
     }

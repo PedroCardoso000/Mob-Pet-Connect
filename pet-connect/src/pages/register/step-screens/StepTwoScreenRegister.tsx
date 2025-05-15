@@ -1,8 +1,8 @@
 import { TouchableOpacity, Text, View, TextInput } from "react-native";
 import React, { useState } from "react";
 import { registerStyles } from "../register-style";
-import { Errors } from "@/@types/Errors";
-import { FormData } from "@/@types/FormData";
+import { Errors } from "@/src/@types/Errors";
+import { FormData } from "@/src/@types/FormData";
 import InputComponent from "@/src/components/InputConnect";
 
 const StepTwoScreenRegister = () => {

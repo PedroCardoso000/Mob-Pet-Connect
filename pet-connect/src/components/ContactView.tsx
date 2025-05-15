@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet, Text } from "react-native";
-import {Contact} from "@/@types/Contact"
+import {Contact} from "@/src/@types/Contact"
 import { navigate } from "../navigator/app_navigator";
 
 const examplePerson = require("@/assets/user.png");

@@ -1,8 +1,8 @@
 import { MenuPet } from "@/components/MenuPet"
 import { ScrollView, View, StyleSheet, Dimensions } from "react-native"
 import React from "react";
-import { Pet } from "../../../@types/Pet";
-
+import { Pet } from "../../@types/Pet";
+import { navigate } from "@/src/navigator/app_navigator";
 
 const style = StyleSheet.create({
   scrollView: {
