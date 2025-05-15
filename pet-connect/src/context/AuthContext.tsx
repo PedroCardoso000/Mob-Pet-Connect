@@ -14,7 +14,7 @@ interface AuthProviderProps {
 interface AuthContextData {
     user: User | null;
     loading: boolean;
-    login: (email: string, password: string) => Promise<void>;
+    login: (email: string, password: string) => Promise<any>;
     logout: () => Promise<void>;
     getUserByToken: () => Promise<void>;
 }
@@ -45,32 +45,29 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }, []);
 
     const login = async (email: string, password: string) => {
-        const {status, data } = await api.post('/auth/login', { email, password });
-        
+        const { status, data } = await api.post('/auth/login', { email, password });
 
-        if (status !== HttpStatusCode.Ok) 
+
+        if (status !== HttpStatusCode.Ok)
             throw new Error('Login falhou');
-        else{
+        else {
             const token = data?.token;
             console.log('token', token);
             setToken(token);
             navigate(PagesNavigator.ContactList);
         }
-        
-        return data;
 
+        return data;
     };
 
     const getUserByToken = async () => {
- 
         const { status, data } = await api.get('/user/bytoken');
-
         if (status !== HttpStatusCode.Ok) throw new Error('Usuário não encontrado');
 
-        const obj: User = await data.json();
-
-        setUser(obj);
+        setUser(data); 
+        await AsyncStorage.setItem('@PConnect:user', JSON.stringify(data));
     };
+
 
     const logout = async () => {
         setUser(null);

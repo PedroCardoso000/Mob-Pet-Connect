@@ -1,28 +1,47 @@
 import SmallText from '@/src/components/SmallText';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { userScreenStyles } from './user-profile-style';
-const profileData = {
-  username: "Kaique Santos",
-  profilePic: require("../../../assets/user.png"),
-  posts: 120,
-  followers: 3400,
-  following: 300,
-  bio: "Obejtivos:",
-  description:
-    `
+import { useContext, useEffect } from 'react';
+import { AuthContext } from '@/src/context/AuthContext';
+import { getToken } from '@/src/service/tokenService';
+import { api } from '@/src/api/axios';
+import { HttpStatusCode } from 'axios';
+import ButtonComponent from '@/src/components/ButtonConnect';
+
+
+
+
+
+
+
+const UserProfileScreen = () => {
+  const { user } = useContext(AuthContext);
+
+
+  const profileData = {
+    username: user?.name,
+    profilePic: require(""),
+    posts: 120,
+    followers: 3400,
+    following: 300,
+    bio: user?.email,
+    description:
+      `
   Encontrar um parceiro para reprodução para seus cães.
   Ampliar sua família peluda com filhotes saudáveis e ativos.
   Conectar-se com outros donos de cães apaixonados por atividades ao ar livre.
   `,
-  feed: [
-    { id: "1", image: require("../../../assets/dog.jpg"), name: "Rex", sex: "Macho", breed: "Vira-lata" },
-    { id: "2", image: require("../../../assets/dog.jpg"), name: "Alex", sex: "Femea", breed: "Vira-lata" },
-    { id: "3", image: require("../../../assets/dog.jpg"), name: "Rennie", sex: "Macho", breed: "Vira-lata" },
-    { id: "4", image: require("../../../assets/dog.jpg"), name: "Roy", sex: "Femea", breed: "Vira-lata" },
-  ],
-};
+    feed: [
+      { id: "1", image: require("../../../assets/dog.jpg"), name: "Rex", sex: "Macho", breed: "Vira-lata" },
+      { id: "2", image: require("../../../assets/dog.jpg"), name: "Alex", sex: "Femea", breed: "Vira-lata" },
+      { id: "3", image: require("../../../assets/dog.jpg"), name: "Rennie", sex: "Macho", breed: "Vira-lata" },
+      { id: "4", image: require("../../../assets/dog.jpg"), name: "Roy", sex: "Femea", breed: "Vira-lata" },
+    ],
+  };
 
-const UserProfileScreen = () => {
+
+
+
   return (
     <View style={userScreenStyles.container}>
       {/* ✅ HEADER */}
@@ -45,7 +64,6 @@ const UserProfileScreen = () => {
         <SmallText>{profileData.description}</SmallText>
       </View>
 
-      {/* ✅ STATS */}
       <View style={userScreenStyles.statsRow}>
 
         <View style={userScreenStyles.statButton}>
@@ -71,9 +89,8 @@ const UserProfileScreen = () => {
           </View>
         )}
         style={userScreenStyles.feed}
-
       />
-
+      {/* <ButtonComponent title="Entrar" onPress={() => getUserByPk(token)} /> */}
     </View>
   )
 };
