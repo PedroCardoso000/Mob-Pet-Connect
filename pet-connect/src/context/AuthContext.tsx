@@ -4,6 +4,8 @@ import { api } from '../api/axios';
 import { HttpStatusCode } from 'axios';
 import { User } from '@/@types/User';
 import { setToken, getToken } from '../service/tokenService';
+import { PagesNavigator } from '../navigator/pages-navigator';
+import { navigate } from '../navigator/app_navigator';
 
 interface AuthProviderProps {
     children: ReactNode;
@@ -52,6 +54,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             const token = data?.token;
             console.log('token', token);
             setToken(token);
+            navigate(PagesNavigator.ContactList);
         }
         
         return data;
@@ -67,8 +70,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const obj: User = await data.json();
 
         setUser(obj);
-        console.log('obj', obj);
-        // return obj;
     };
 
     const logout = async () => {

@@ -7,7 +7,20 @@ import { api } from '@/src/api/axios';
 import { getToken, setToken } from '@/src/service/tokenService';
 import { HttpStatusCode } from 'axios';
 import { AuthContext } from '@/src/context/AuthContext';
+import { navigate } from '@/src/navigator/app_navigator';
+import { PagesNavigator } from '@/src/navigator/pages-navigator';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
+
+type RootStackParamList = {
+  Login: undefined;
+  Home: undefined;
+};
+
+type NavigationProps = NativeStackNavigationProp<RootStackParamList, 'Login'>;
+
 const LoginScreen = () => {
+  const navigation = useNavigation<NavigationProps>();
   const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,12 +29,12 @@ const LoginScreen = () => {
 
 
   async function handleLogin(email: string, password: string) {
-
     try {
       if (email && password) {
         setIsLoading(true);
-        const response = await login(email, password);
+        await login(email, password);
         
+        navigation.replace('Home'); // agora navigation está definido
       } else {
         console.warn('Preencha todos os campos!');
       }
