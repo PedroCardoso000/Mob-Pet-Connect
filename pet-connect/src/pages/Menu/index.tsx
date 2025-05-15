@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Pet } from "@/@types/Pet";
 import { api } from "@/src/api/axios";
 
-export function Menu() {
+export default function Menu() {
 
   const [pets, setPets] = useState<Pet[]>([]);
 

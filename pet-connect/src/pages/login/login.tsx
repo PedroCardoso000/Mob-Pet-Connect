@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { loginstyles } from './login-style';
 import InputComponent from '@/src/components/InputConnect';
@@ -6,7 +6,9 @@ import ButtonComponent from '@/src/components/ButtonConnect';
 import { api } from '@/src/api/axios';
 import { getToken, setToken } from '@/src/service/tokenService';
 import { HttpStatusCode } from 'axios';
+import { AuthContext } from '@/src/context/AuthContext';
 const LoginScreen = () => {
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,20 +20,13 @@ const LoginScreen = () => {
     try {
       if (email && password) {
         setIsLoading(true);
-        const { status, data } = await api.post(
-          '/auth/login',
-          { email, password },
-        );
-
-        if (status === HttpStatusCode.Ok) {
-          const token = setToken(data.token);
-          setError(true);
-          return data;
-        }
+        const response = await login(email, password);
+        
       } else {
         console.warn('Preencha todos os campos!');
       }
     } catch (error) {
+      setError(true);
       console.error('Erro ao fazer login:');
     } finally {
       setIsLoading(false);

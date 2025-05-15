@@ -1,5 +1,4 @@
 import SmallText from '@/src/components/SmallText';
-import React from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { userScreenStyles } from './user-profile-style';
 const profileData = {

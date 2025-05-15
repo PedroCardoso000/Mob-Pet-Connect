@@ -1,13 +1,12 @@
 import axios from "axios";
 import { getToken } from "../service/tokenService";
+import { ApiConfig } from "./api-config";
+
 
 export const api = axios.create({
-  // baseURL: "https://petconnectbackend-r2ldr42g.b4a.run/", // URL DA API
-  baseURL: "http://192.168.15.4:8080/",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
+  baseURL: ApiConfig.baseURL,
+  headers: ApiConfig.headers,
+  withCredentials: ApiConfig.withCredentials,
 });
 
 api.interceptors.request.use(
