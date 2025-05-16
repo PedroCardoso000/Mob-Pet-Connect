@@ -43,7 +43,7 @@ const style = StyleSheet.create({
   }
 })
 
-export function ContactList() {
+export default function ContactList() {
   return (
     <ScrollView style={style.scrollView}>
       <View style={style.view}>
