@@ -6,6 +6,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { navigate, RootStackParamList } from "../navigator/app_navigator";
 import { useState } from "react";
+import { PagesNavigator } from "../navigator/pages-navigator";
 
 const styles = StyleSheet.create({
   footerContainer: {
@@ -101,7 +102,7 @@ export function Footer() {
       
       <Pressable 
         style={styles.itemView}
-        onPress={() => handlePress('Chat')}
+        onPress={() => handlePress(PagesNavigator.Chat)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.iconContainer}>

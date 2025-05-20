@@ -6,7 +6,7 @@ import { FormData } from "../../../@types/FormData";
 import { registerStyles } from './register-style';
 import StepOneScreenRegister from './step-screens/StepOneScreenRegister';
 import StepTwoScreenRegister from './step-screens/StepTwoScreenRegister';
-
+import { api } from '@/src/api/axios';
 const RegisterScreen = () => {
 
   const [step, setStep] = useState(1);
@@ -23,11 +23,12 @@ const RegisterScreen = () => {
 
 
   const validarStepOne = () => {
-
+    
     const newErrors: Errors = {};
-
+  
+    console.log(JSON.stringify(formData))
     if (formData.nome.trim() === "") {
-      newErrors.nome = "Nome obrigatório mano";
+      newErrors.nome = "Nome obrigatório";
     }
     if (formData.email.trim() === "") {
       newErrors.email = "Lembre-se de preencher o E-mail"
@@ -41,16 +42,17 @@ const RegisterScreen = () => {
     const telefone = formData.telefone.trim();
 
     if (telefone === "") {
-      newErrors.telefone = "Telefone obrigatório, meu irmão";
+      newErrors.telefone = "Telefone obrigatório";
     }
     else {
       const telefoneLimpo = telefone.replace(/\D/g, "");
-      if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
-        newErrors.telefone = "Número de telefone inválido, meu irmão";
+      if (telefoneLimpo.length <= 8 || telefoneLimpo.length >= 10) {
+        newErrors.telefone = "Número de telefone inválido";
       }
     }
 
     setErrors(newErrors);
+    console.log("Teste", newErrors);
     return Object.keys(newErrors).length === 0;
 
   };
@@ -60,8 +62,6 @@ const RegisterScreen = () => {
 
 
     const newErrors: Record<string, string> = {};
-    newErrors.foo = "foo";
-    console.log(newErrors);
 
     const senha = formData.senha.trim();
     const confirmarSenha = formData.confirmarSenha.trim();
@@ -85,7 +85,10 @@ const RegisterScreen = () => {
   };
 
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
+
+    console.log("texto teste", formData);
+
     if (step === 1) {
       if (validarStepOne()) {
         setStep(2);
@@ -95,7 +98,9 @@ const RegisterScreen = () => {
     } else {
       if (validarStepTwo()) {
         console.log('Dados do consagrado: ', formData);
-        Alert.alert('Sucesso', ' Cadastro realizado com sucesso')
+        const response = await api.post('/user', formData);
+        console.log('Dados:', response.status);
+        Alert.alert('Sucesso', ' Cadastro realizado com sucesso');
       } else {
         Alert.alert('Erro', '!! Por favor verifique a sua senha');
       }
@@ -114,9 +119,11 @@ const RegisterScreen = () => {
         <Text style={registerStyles.title}>Cadastro</Text>
       </View>
 
-      {step === 1 ? <StepOneScreenRegister /> : <StepTwoScreenRegister />}
+      {step === 1 ? <StepOneScreenRegister setFormData={setFormData} formData={formData}/> : <StepTwoScreenRegister setFormData={setFormData} formData={formData}/>}
 
-      <ButtonComponent  title='Continuar' />
+      <ButtonComponent  title='Continuar' 
+        onPress={handleContinue}
+      />
 
       <View style={registerStyles.dotsContainer}>
         <TouchableOpacity onPress={() => setStep(1)}>

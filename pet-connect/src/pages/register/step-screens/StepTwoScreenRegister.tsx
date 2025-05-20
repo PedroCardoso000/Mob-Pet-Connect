@@ -5,23 +5,23 @@ import { Errors } from "@/@types/Errors";
 import { FormData } from "@/@types/FormData";
 import InputComponent from "@/src/components/InputConnect";
 
-const StepTwoScreenRegister = () => {
-    const [formData, setFormData] = useState<FormData>({
-        nome: '',
-        email: '',
-        telefone: '',
-        senha: '',
-        confirmarSenha: ''
-    });
+const StepTwoScreenRegister = (props: any) => {
+    // const [formData, setFormData] = useState<FormData>({
+    //     nome: '',
+    //     email: '',
+    //     telefone: '',
+    //     senha: '',
+    //     confirmarSenha: ''
+    // });
 
     const [errors, setErrors] = useState<Errors>({});
     return (
         <>
             <View style={registerStyles.formContainer}>
-                <InputComponent placeholder="Senha" icon="../../../assets/password.png" />
+                <InputComponent onChange={e => props.setFormData({...props.formData, senha: e.nativeEvent.text})} placeholder="Senha" icon="../../../assets/password.png" />
                 {errors.senha && <Text style={registerStyles.errorText}>{errors.senha}</Text>}
 
-                <InputComponent placeholder="Confirmar Senha" icon="../../../assets/password.png" />
+                <InputComponent onChange={e => props.setFormData({...props.formData, confirmarSenha: e.nativeEvent.text})} placeholder="Confirmar Senha" icon="../../../assets/password.png" />
                 {errors.confirmarSenha && <Text style={registerStyles.errorText}>{errors.confirmarSenha}</Text>}
             </View>
         </>
