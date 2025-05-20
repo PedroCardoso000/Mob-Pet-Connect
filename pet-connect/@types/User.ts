@@ -6,4 +6,5 @@ export type User ={
     sex: string;
     phone: string;
     description?: string;
+    pets: any;
 }

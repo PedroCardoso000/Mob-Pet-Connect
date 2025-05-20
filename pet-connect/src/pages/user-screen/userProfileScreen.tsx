@@ -24,7 +24,7 @@ const UserProfileScreen = () => {
     posts: 120,
     followers: 3400,
     following: 300,
-    bio: user?.email,
+    bio: user?.phone,
     description:
       `
   Encontrar um parceiro para reprodução para seus cães.
@@ -39,7 +39,8 @@ const UserProfileScreen = () => {
     ],
   };
 
-
+  console.log(user);
+  
 
 
   return (
