@@ -6,51 +6,45 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { navigate, RootStackParamList } from "../navigator/app_navigator";
 import { useState } from "react";
+import { PagesNavigator } from "../navigator/pages-navigator";
 
 const styles = StyleSheet.create({
   footerContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    paddingVertical: 5,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    backgroundColor: "white",
     borderTopWidth: 1,
-    borderTopColor: '#e0e0e0',
+    borderTopColor: "#e0e0e0",
     elevation: 8,
-    shadowColor: '#000', 
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: -3 },
     shadowOpacity: 0.1,
     shadowRadius: 3,
+    height: 60,
   },
   itemView: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 50,
-  },
-  itemPressed: {
-    opacity: 0.7,
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
   },
   itemText: {
     fontSize: 12,
-    marginTop: 4,
-    color: 'black',
+    marginTop: 2,
+    color: "black",
   },
   iconContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   selectedIndicator: {
-    position: 'absolute',
-    bottom: -15,
+    position: "absolute",
+    bottom: 0,
     height: 3,
-    width: '100%',
-    backgroundColor: 'black',
-  }
+    width: "100%",
+    backgroundColor: "black",
+  },
 });
 
 export function Footer() {
@@ -101,7 +95,7 @@ export function Footer() {
       
       <Pressable 
         style={styles.itemView}
-        onPress={() => handlePress('Chat')}
+        onPress={() => handlePress(PagesNavigator.Chat)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.iconContainer}>

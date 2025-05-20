@@ -7,6 +7,7 @@ import { getToken } from '@/src/service/tokenService';
 import { api } from '@/src/api/axios';
 import { HttpStatusCode } from 'axios';
 import ButtonComponent from '@/src/components/ButtonConnect';
+import { MainLayout } from '@/src/components/MainLayout';
 
 
 
@@ -19,7 +20,7 @@ const UserProfileScreen = () => {
 
 
   console.log(user);
-  
+
 
   const profileData = {
     username: user?.name,
@@ -45,59 +46,63 @@ const UserProfileScreen = () => {
   };
 
   console.log(user);
-  
+
 
 
   return (
-    <View style={userScreenStyles.container}>
-      {/* ✅ HEADER */}
-      <View style={userScreenStyles.header}>
-        <Image source={profileData.profilePic} style={userScreenStyles.profilePic} />
-        <View style={userScreenStyles.userInfo}>
-          <Text style={userScreenStyles.username}>{profileData.username}</Text>
-          <View style={userScreenStyles.formrow}>
-            <View style={userScreenStyles.statusUser}>
+    <>
+      <MainLayout>
+        <View style={userScreenStyles.container}>
+          {/* ✅ HEADER */}
+          <View style={userScreenStyles.header}>
+            <Image source={profileData.profilePic} style={userScreenStyles.profilePic} />
+            <View style={userScreenStyles.userInfo}>
+              <Text style={userScreenStyles.username}>{profileData.username}</Text>
+              <View style={userScreenStyles.formrow}>
+                <View style={userScreenStyles.statusUser}>
+                </View>
+                <SmallText>Disponivel</SmallText>
+              </View>
             </View>
-            <SmallText>Disponivel</SmallText>
+
           </View>
-        </View>
-
-      </View>
 
 
-      <View style={userScreenStyles.textContainer}>
-        <Text style={userScreenStyles.bio}>{profileData.bio}</Text>
-        <SmallText>{profileData.description}</SmallText>
-      </View>
-
-      <View style={userScreenStyles.statsRow}>
-
-        <View style={userScreenStyles.statButton}>
-          <SmallText>Adicionar mais Pets</SmallText>
-          <TouchableOpacity style={userScreenStyles.editButton}>
-            <Image
-              source={require('../../../assets/addPet.png')}
-              style={{ width: 20, height: 20, borderColor: 'none' }}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <FlatList
-        numColumns={3}
-        data={profileData.feed}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <View style={userScreenStyles.feedItem}>
-            <Image source={item.image} style={userScreenStyles.feedImage} />
-            <SmallText>Nome: {item.name}</SmallText>
-            <SmallText>Sexo: {item.sex}</SmallText>
+          <View style={userScreenStyles.textContainer}>
+            <Text style={userScreenStyles.bio}>{profileData.bio}</Text>
+            <SmallText>{profileData.description}</SmallText>
           </View>
-        )}
-        style={userScreenStyles.feed}
-      />
-      {/* <ButtonComponent title="Entrar" onPress={() => getUserByPk(token)} /> */}
-    </View>
+
+          <View style={userScreenStyles.statsRow}>
+
+            <View style={userScreenStyles.statButton}>
+              <SmallText>Adicionar mais Pets</SmallText>
+              <TouchableOpacity style={userScreenStyles.editButton}>
+                <Image
+                  source={require('../../../assets/addPet.png')}
+                  style={{ width: 20, height: 20, borderColor: 'none' }}
+                />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <FlatList
+            numColumns={3}
+            data={profileData.feed}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={userScreenStyles.feedItem}>
+                <Image source={item.image} style={userScreenStyles.feedImage} />
+                <SmallText>Nome: {item.name}</SmallText>
+                <SmallText>Sexo: {item.sex}</SmallText>
+              </View>
+            )}
+            style={userScreenStyles.feed}
+          />
+          {/* <ButtonComponent title="Entrar" onPress={() => getUserByPk(token)} /> */}
+        </View>
+      </MainLayout>
+    </>
   )
 };
 

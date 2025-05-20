@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, StatusBar } from "react-native"
 import AntDesign from "@expo/vector-icons/AntDesign"
 import { width } from "@/src/utils/width"
 import { navigate } from "@/src/navigator/app_navigator"
+import { PagesNavigator } from "@/src/navigator/pages-navigator"
 
 const styles = StyleSheet.create({
   container: {
@@ -37,7 +38,7 @@ export function ChatHeader() {
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <View style={styles.container}>
         <View style={styles.leftSection}>
-          <TouchableOpacity onPressOut={() => navigate("Contact_List")}>
+          <TouchableOpacity onPressOut={() => navigate(PagesNavigator.ContactList)}>
             <AntDesign name="arrowleft" size={24} color="black" />
           </TouchableOpacity>
         </View>

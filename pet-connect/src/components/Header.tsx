@@ -1,46 +1,49 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ProfileIcon } from "./ProfileIcon";
 import InputComponent from "@/src/components/InputConnect";
 
-const style = StyleSheet.create({
+export function Header() {
+  const insets = useSafeAreaInsets();
+
+  return (
+    <View style={[styles.headerView, { paddingTop: insets.top + 5 }]}>
+      <View style={styles.marginRight16}>
+        <ProfileIcon size={40} />
+      </View>
+      <View style={styles.flexItem}>
+        <InputComponent
+          styleInput={styles.inputBackground}
+          placeholder=""
+        />
+      </View>
+      <View style={{ width: 40 }} /> {/* espaço reservado */}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
   headerView: {
     flexDirection: "row",
     justifyContent: "space-between",
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    marginTop: 32,
     paddingHorizontal: 16,
-    paddingVertical: 5,
-    zIndex: 10,
+    paddingBottom: 8,
+    backgroundColor: "white",
     borderBottomWidth: 1,
-    borderBottomColor: "#e0e0e0"
+    borderBottomColor: "#e0e0e0",
+    alignItems: "center",
   },
   flexItem: {
     flex: 1,
-    height: 48,
+    height: 40,
   },
   marginRight16: {
-    marginRight: 16
+    marginRight: 16,
   },
   inputBackground: {
     backgroundColor: "#EAEAEA",
     borderRadius: 8,
-    padding: 0
-  }
-})
-
-export function Header() {
-  return (
-    <View style={style.headerView}>
-      <View style={style.marginRight16}>
-        <ProfileIcon size={48}/>
-      </View>
-      <View style={style.flexItem}>
-        <InputComponent styleInput={style.inputBackground} placeholder=""/>
-      </View>
-      <View></View>
-    </View>
-  )
-}
+    paddingHorizontal: 8,
+    height: 40,
+  },
+});
