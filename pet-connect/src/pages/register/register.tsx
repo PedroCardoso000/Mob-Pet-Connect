@@ -9,10 +9,12 @@ import StepTwoScreenRegister from './step-screens/StepTwoScreenRegister';
 import { api } from '@/src/api/axios';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProps } from '@/src/navigator/navigator-simple-app';
+import { HttpStatusCode } from 'axios';
+import Loading from '@/src/components/Loading';
 const RegisterScreen = () => {
   const navigation = useNavigation<NavigationProps>();
   const [step, setStep] = useState(1);
-
+ const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -61,33 +63,6 @@ const RegisterScreen = () => {
   };
 
 
-  const validarStepTwo = () => {
-
-
-    const newErrors: Record<string, string> = {};
-
-    const senha = formData.password.trim();
-    const confirmarSenha = formData.confirmPassword.trim();
-
-    if (!senha) {
-      newErrors.senha = "A senha é obrigatória!!";
-    } else if (senha.length < 6) {
-      newErrors.senha = "Senha deve ter pelo menos 6 caracteres!!";
-    }
-
-    if (!confirmarSenha) {
-      newErrors.confirmarSenha = "Confirmação de senha é obrigatória!!!";
-    }
-    else if (senha != confirmarSenha) {
-      newErrors.confirmarSenha = "As senhas estão diferentes";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
-  };
-
-
   const handleContinue = async () => {
 
 
@@ -98,16 +73,23 @@ const RegisterScreen = () => {
         Alert.alert('Erro', 'Por favor, preencha todos os campos');
       }
     } else {
-      // if (validarStepTwo()) {
-      const response = await api.post('/user', formData);
-
-      //   Alert.alert('Sucesso', ' Cadastro realizado com sucesso');
-      // } else {
-      //   Alert.alert('Erro', '!! Por favor verifique a sua senha');
-      // }
+      try {
+        setIsLoading(true);
+        const { data, status } = await api.post('/user', formData);
+        
+        if(status === HttpStatusCode.Ok){
+          
+          navigation.replace('Home');
+        }
+      } catch (error) {
+        console.error(error);
+      }finally{
+        setIsLoading(false);
+      }
     }
   };
 
+  if(isLoading) return (<><Loading/></>)
 
   return (
     <View style={registerStyles.container}>
