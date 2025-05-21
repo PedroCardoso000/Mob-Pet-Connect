@@ -1,7 +1,7 @@
-import { Pet } from "@/src/@types/Pet";
 import { navigate } from "@/src/navigator/app_navigator";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 import { PagesNavigator } from "../navigator/pages-navigator";
+import { Pet } from "@/@types/Pet";
 
 const exampleDog = require("@/assets/dog.jpg");
 
