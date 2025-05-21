@@ -6,17 +6,20 @@ import { FormData } from "../../../@types/FormData";
 import { registerStyles } from './register-style';
 import StepOneScreenRegister from './step-screens/StepOneScreenRegister';
 import StepTwoScreenRegister from './step-screens/StepTwoScreenRegister';
-
+import { api } from '@/src/api/axios';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationProps } from '@/src/navigator/navigator-simple-app';
 const RegisterScreen = () => {
-
+  const navigation = useNavigation<NavigationProps>();
   const [step, setStep] = useState(1);
 
   const [formData, setFormData] = useState<FormData>({
-    nome: '',
+    name: '',
     email: '',
-    telefone: '',
-    senha: '',
-    confirmarSenha: ''
+    cpf: '',
+    phone: '',
+    password: '',
+    confirmPassword: ''
   });
 
   const [errors, setErrors] = useState<Errors>({});
@@ -26,8 +29,9 @@ const RegisterScreen = () => {
 
     const newErrors: Errors = {};
 
-    if (formData.nome.trim() === "") {
-      newErrors.nome = "Nome obrigatório mano";
+    console.log(JSON.stringify(formData))
+    if (formData.name.trim() === "") {
+      newErrors.name = "Nome obrigatório";
     }
     if (formData.email.trim() === "") {
       newErrors.email = "Lembre-se de preencher o E-mail"
@@ -38,19 +42,20 @@ const RegisterScreen = () => {
       }
     }
 
-    const telefone = formData.telefone.trim();
+    const telefone = formData.phone.trim();
 
     if (telefone === "") {
-      newErrors.telefone = "Telefone obrigatório, meu irmão";
+      newErrors.phone = "Telefone obrigatório";
     }
     else {
       const telefoneLimpo = telefone.replace(/\D/g, "");
-      if (telefoneLimpo.length < 10 || telefoneLimpo.length > 11) {
-        newErrors.telefone = "Número de telefone inválido, meu irmão";
+      if (telefoneLimpo.length <= 8 || telefoneLimpo.length >= 10) {
+        newErrors.phone = "Número de telefone inválido";
       }
     }
 
     setErrors(newErrors);
+    console.log("Teste", newErrors);
     return Object.keys(newErrors).length === 0;
 
   };
@@ -60,11 +65,9 @@ const RegisterScreen = () => {
 
 
     const newErrors: Record<string, string> = {};
-    newErrors.foo = "foo";
-    console.log(newErrors);
 
-    const senha = formData.senha.trim();
-    const confirmarSenha = formData.confirmarSenha.trim();
+    const senha = formData.password.trim();
+    const confirmarSenha = formData.confirmPassword.trim();
 
     if (!senha) {
       newErrors.senha = "A senha é obrigatória!!";
@@ -85,7 +88,9 @@ const RegisterScreen = () => {
   };
 
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
+
+
     if (step === 1) {
       if (validarStepOne()) {
         setStep(2);
@@ -93,12 +98,13 @@ const RegisterScreen = () => {
         Alert.alert('Erro', 'Por favor, preencha todos os campos');
       }
     } else {
-      if (validarStepTwo()) {
-        console.log('Dados do consagrado: ', formData);
-        Alert.alert('Sucesso', ' Cadastro realizado com sucesso')
-      } else {
-        Alert.alert('Erro', '!! Por favor verifique a sua senha');
-      }
+      // if (validarStepTwo()) {
+      const response = await api.post('/user', formData);
+
+      //   Alert.alert('Sucesso', ' Cadastro realizado com sucesso');
+      // } else {
+      //   Alert.alert('Erro', '!! Por favor verifique a sua senha');
+      // }
     }
   };
 
@@ -114,9 +120,15 @@ const RegisterScreen = () => {
         <Text style={registerStyles.title}>Cadastro</Text>
       </View>
 
-      {step === 1 ? <StepOneScreenRegister /> : <StepTwoScreenRegister />}
+      {step === 1 ? <StepOneScreenRegister setFormData={setFormData} formData={formData} /> : <StepTwoScreenRegister setFormData={setFormData} formData={formData} />}
 
-      <ButtonComponent  title='Continuar' />
+      <ButtonComponent title='Continuar'
+        onPress={handleContinue}
+      />
+
+      <TouchableOpacity onPress={() => navigation.replace('Login')}>
+        <Text style={registerStyles.cadastre}>Já estou cadastrado</Text>
+      </TouchableOpacity>
 
       <View style={registerStyles.dotsContainer}>
         <TouchableOpacity onPress={() => setStep(1)}>

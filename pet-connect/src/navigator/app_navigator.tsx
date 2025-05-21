@@ -14,6 +14,7 @@ import { Layout } from '../components/Layout';
 import { AuthContext } from '../context/AuthContext';
 import { PagesNavigator } from './pages-navigator';
 import Menu from '../pages/menu';
+import { PetProfile } from '../pages/PetProfile';
 
 export type RootStackParamList = {
   [PagesNavigator.Login]: undefined;
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   [PagesNavigator.Chat]: undefined;
   [PagesNavigator.Layout]: undefined;
   [PagesNavigator.Menu]: undefined;
+  [PagesNavigator.PetProfile]: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -60,6 +62,7 @@ const AppNavigator = () => {
             <Stack.Screen name={PagesNavigator.ContactList} component={ContactList} />
             <Stack.Screen name={PagesNavigator.Chat} component={Chat} />
             <Stack.Screen name={PagesNavigator.Menu} component={Menu} />
+            <Stack.Screen name={PagesNavigator.PetProfile} component={PetProfile} />
           </>
         )}
       </Stack.Navigator>

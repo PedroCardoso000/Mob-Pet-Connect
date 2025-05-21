@@ -7,20 +7,22 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native"; // 👈 IMPORTANTE
 import UserProfileScreen from "../pet-connect/src/pages/user-screen/userProfileScreen";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import RegisterScreen from "./src/pages/register/register";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-       <SafeAreaProvider> 
-      <AuthProvider>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Profile" component={UserProfileScreen} />
-          <Stack.Screen name="Home" component={Menu} />
-        </Stack.Navigator>
-      </AuthProvider>
+      <SafeAreaProvider>
+        <AuthProvider>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen name="Login" component={LoginScreen} />
+            <Stack.Screen name="Profile" component={UserProfileScreen} />
+            <Stack.Screen name="Home" component={Menu} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+          </Stack.Navigator>
+        </AuthProvider>
       </SafeAreaProvider>
     </NavigationContainer>
   );

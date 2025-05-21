@@ -1,7 +1,8 @@
 export interface Errors {
-    nome?: string;
+    name?: string;
     email?: string;
-    telefone?: string;
-    senha?: string;
-    confirmarSenha?: string;
+    phone?: string;
+    password?: string;
+    confirmPassword?: string;
+    cpf?: string;
 }
