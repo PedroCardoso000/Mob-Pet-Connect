@@ -19,25 +19,17 @@ import Loading from '@/src/components/Loading'; // 👈 Importando seu component
 
 const LoginScreen = () => {
   const navigation = useNavigation<NavigationProps>();
-  const { login, getUserByToken } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
 
   const handleLogin = async (email: string, password: string) => {
     try {
       setIsLoading(true);
-      const { status, data } = await api.post('/auth/login', { email, password });
-
-      if (status !== HttpStatusCode.Ok) throw new Error('Login falhou');
-
-      const token = data?.token;
-      setToken(token);
-
-      await getUserByToken();
-      navigation.replace('Profile');
+      const response = await login(email, password);
+      return response;
     } catch (err) {
       setError(true);
     } finally {

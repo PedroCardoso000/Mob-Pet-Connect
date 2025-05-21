@@ -45,7 +45,6 @@ const UserProfileScreen = () => {
     }),
   };
 
-  console.log(user);
 
 
 

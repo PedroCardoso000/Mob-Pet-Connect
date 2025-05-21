@@ -5,6 +5,10 @@ export type RootStackParamList = {
   Home: undefined;
   Profile: undefined;
   Register: undefined;
+  UserProfile: undefined;
+  Chat: undefined;
+  ContactList: undefined;
+  PetProfile: undefined;
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList, 'Login'>;

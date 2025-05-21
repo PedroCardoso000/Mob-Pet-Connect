@@ -22,7 +22,7 @@ const StepOneScreenRegister = (props: any) => {
                 <InputComponent onChange={e => props.setFormData({ ...props.formData, phone: e.nativeEvent.text })} placeholder="phone" icon="../../../../assets/password.png" />
                 {errors.phone && <Text style={registerStyles.errorText}>{errors.phone}</Text>}
 
-                <InputComponent onChange={e => props.setFormData({ ...props.formData, cpf: e.nativeEvent.text })} placeholder="cpf" icon="../../../../assets/password.png" />
+                <InputComponent onChange={e => props.setFormData({ ...props.formData, cpf: e.nativeEvent.text })} placeholder="CPF" icon="../../../../assets/password.png" />
                 {errors.cpf && <Text style={registerStyles.errorText}>{errors.cpf}</Text>}
             </View>
 
