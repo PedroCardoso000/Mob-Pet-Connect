@@ -12,11 +12,12 @@ const RegisterScreen = () => {
   const [step, setStep] = useState(1);
 
   const [formData, setFormData] = useState<FormData>({
-    nome: '',
+    name: '',
     email: '',
-    telefone: '',
-    senha: '',
-    confirmarSenha: ''
+    cpf: '',
+    phone: '',
+    password: '',
+    confirmPassword: ''
   });
 
   const [errors, setErrors] = useState<Errors>({});
@@ -27,8 +28,8 @@ const RegisterScreen = () => {
     const newErrors: Errors = {};
   
     console.log(JSON.stringify(formData))
-    if (formData.nome.trim() === "") {
-      newErrors.nome = "Nome obrigatório";
+    if (formData.name.trim() === "") {
+      newErrors.name = "Nome obrigatório";
     }
     if (formData.email.trim() === "") {
       newErrors.email = "Lembre-se de preencher o E-mail"
@@ -39,15 +40,15 @@ const RegisterScreen = () => {
       }
     }
 
-    const telefone = formData.telefone.trim();
+    const telefone = formData.phone.trim();
 
     if (telefone === "") {
-      newErrors.telefone = "Telefone obrigatório";
+      newErrors.phone = "Telefone obrigatório";
     }
     else {
       const telefoneLimpo = telefone.replace(/\D/g, "");
       if (telefoneLimpo.length <= 8 || telefoneLimpo.length >= 10) {
-        newErrors.telefone = "Número de telefone inválido";
+        newErrors.phone = "Número de telefone inválido";
       }
     }
 
@@ -63,8 +64,8 @@ const RegisterScreen = () => {
 
     const newErrors: Record<string, string> = {};
 
-    const senha = formData.senha.trim();
-    const confirmarSenha = formData.confirmarSenha.trim();
+    const senha = formData.password.trim();
+    const confirmarSenha = formData.confirmPassword.trim();
 
     if (!senha) {
       newErrors.senha = "A senha é obrigatória!!";
@@ -87,7 +88,6 @@ const RegisterScreen = () => {
 
   const handleContinue = async () => {
 
-    console.log("texto teste", formData);
 
     if (step === 1) {
       if (validarStepOne()) {
@@ -96,14 +96,13 @@ const RegisterScreen = () => {
         Alert.alert('Erro', 'Por favor, preencha todos os campos');
       }
     } else {
-      if (validarStepTwo()) {
-        console.log('Dados do consagrado: ', formData);
+      // if (validarStepTwo()) {
         const response = await api.post('/user', formData);
-        console.log('Dados:', response.status);
-        Alert.alert('Sucesso', ' Cadastro realizado com sucesso');
-      } else {
-        Alert.alert('Erro', '!! Por favor verifique a sua senha');
-      }
+
+      //   Alert.alert('Sucesso', ' Cadastro realizado com sucesso');
+      // } else {
+      //   Alert.alert('Erro', '!! Por favor verifique a sua senha');
+      // }
     }
   };
 

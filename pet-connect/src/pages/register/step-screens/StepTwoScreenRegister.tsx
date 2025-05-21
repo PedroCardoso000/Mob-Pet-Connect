@@ -18,11 +18,11 @@ const StepTwoScreenRegister = (props: any) => {
     return (
         <>
             <View style={registerStyles.formContainer}>
-                <InputComponent onChange={e => props.setFormData({...props.formData, senha: e.nativeEvent.text})} placeholder="Senha" icon="../../../assets/password.png" />
-                {errors.senha && <Text style={registerStyles.errorText}>{errors.senha}</Text>}
+                <InputComponent onChange={e => props.setFormData({...props.formData, password: e.nativeEvent.text})} placeholder="Senha" icon="../../../assets/password.png" />
+                {errors.password && <Text style={registerStyles.errorText}>{errors.password}</Text>}
 
-                <InputComponent onChange={e => props.setFormData({...props.formData, confirmarSenha: e.nativeEvent.text})} placeholder="Confirmar Senha" icon="../../../assets/password.png" />
-                {errors.confirmarSenha && <Text style={registerStyles.errorText}>{errors.confirmarSenha}</Text>}
+                <InputComponent onChange={e => props.setFormData({...props.formData, confirmPassword: e.nativeEvent.text})} placeholder="Confirmar Senha" icon="../../../assets/password.png" />
+                {errors.confirmPassword && <Text style={registerStyles.errorText}>{errors.confirmPassword}</Text>}
             </View>
         </>
     )

@@ -1,6 +1,6 @@
 export const ApiConfig ={
     // baseURL: "https://petconnectbackend-r2ldr42g.b4a.run/", // URL DA API
-  baseURL: "http://192.168.0.100/8080",
+  baseURL: "http://192.168.136.48:8080",
   headers: {
     "Content-Type": "application/json",
   },
