@@ -8,14 +8,10 @@ import {
 import { loginstyles } from './login-style';
 import InputComponent from '@/src/components/InputConnect';
 import ButtonComponent from '@/src/components/ButtonConnect';
-import { api } from '@/src/api/axios';
-import { setToken } from '@/src/service/tokenService';
-import { HttpStatusCode } from 'axios';
 import { AuthContext } from '@/src/context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
-import { User } from '@/@types/User';
 import { NavigationProps } from '@/src/navigator/navigator-simple-app';
-import Loading from '@/src/components/Loading'; // 👈 Importando seu componente
+import Loading from '@/src/components/Loading'; 
 
 const LoginScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -37,7 +33,7 @@ const LoginScreen = () => {
     }
   };
 
-  if (isLoading) return <Loading />; // 👈 Usando o componente
+  if (isLoading) return <Loading />; 
 
   return (
     <View style={loginstyles.container}>

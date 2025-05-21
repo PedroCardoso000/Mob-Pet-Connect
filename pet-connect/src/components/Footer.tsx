@@ -4,9 +4,9 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { navigate, RootStackParamList } from "../navigator/app_navigator";
 import { useState } from "react";
-import { PagesNavigator } from "../navigator/pages-navigator";
+import { useNavigation } from "@react-navigation/native";
+import { NavigationProps } from "../navigator/navigator-simple-app";
 
 const styles = StyleSheet.create({
   footerContainer: {
@@ -48,11 +48,12 @@ const styles = StyleSheet.create({
 });
 
 export function Footer() {
+   const navigation = useNavigation<NavigationProps>();
   const [selectedTab, setSelectedTab] = useState('Pet');
 
-  const handlePress = (screen: keyof RootStackParamList) => {
-    setSelectedTab(screen);
-    navigate(screen);
+  const handlePress = (page: string) => {
+    setSelectedTab(page);
+    navigation.replace(page as any);
   };
 
   return (
@@ -78,7 +79,7 @@ export function Footer() {
           <FontAwesome name="user" size={24} color="black"/>
         </View>
         <Text style={styles.itemText}>Perfil</Text>
-        {selectedTab === 'Profile' && <View style={styles.selectedIndicator} />}
+        {selectedTab === 'UserProfile' && <View style={styles.selectedIndicator} />}
       </Pressable>
       
       <Pressable 
@@ -90,12 +91,12 @@ export function Footer() {
           <Ionicons name="add-circle" size={24} color="black"/>
         </View>
         <Text style={styles.itemText}>Pet</Text>
-        {selectedTab === 'Pet' && <View style={styles.selectedIndicator} />}
+        {selectedTab === 'PetProfile' && <View style={styles.selectedIndicator} />}
       </Pressable>
       
       <Pressable 
         style={styles.itemView}
-        onPress={() => handlePress(PagesNavigator.Chat)}
+        onPress={() => handlePress(selectedTab)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.iconContainer}>
@@ -114,7 +115,7 @@ export function Footer() {
           <MaterialIcons name="settings" size={24} color="black"/>
         </View>
         <Text style={styles.itemText}>Opções</Text>
-        {selectedTab === 'Settings' && <View style={styles.selectedIndicator} />}
+        {selectedTab === 'Chat' && <View style={styles.selectedIndicator} />}
       </Pressable>
     </View>
   );
