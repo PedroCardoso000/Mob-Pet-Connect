@@ -1,4 +1,6 @@
-import { Pet } from "@/@types/Pet";
+import { Pet } from "@/src/@types/Pet";
+import { NavigationProps } from "@/src/navigator/navigator-simple-app";
+import { useNavigation } from "@react-navigation/native";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
 const exampleDog = require("@/assets/dog.jpg");
@@ -26,8 +28,9 @@ type Props = {
 }
 
 export function MenuPet({pet}: Props) {
+  const navigation = useNavigation<NavigationProps>();
   return (
-    <View style={style.view}>  
+    <View style={style.view} onTouchEnd={() => navigation.replace("PetProfile")}>  
         <Image
           source={exampleDog}
           style={style.image}          

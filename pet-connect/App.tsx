@@ -1,4 +1,3 @@
-import React from "react";
 import "@/global.css";
 import LoginScreen from "./src/pages/login/login";
 import Menu from "./src/pages/menu/index";
@@ -9,7 +8,7 @@ import UserProfileScreen from "../pet-connect/src/pages/user-screen/userProfileS
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import RegisterScreen from "./src/pages/register/register";
 import { Chat } from "./src/pages/Chat";
-import { PetProfile } from "./src/pages/PetProfile";
+import PetProfile, { PropsPetProfile }  from "./src/pages/PetProfile";
 import ContactList from "./src/pages/contactList/contactList";
 
 const Stack = createNativeStackNavigator();
@@ -28,7 +27,7 @@ export default function App() {
 
             <Stack.Screen name="Chat" component={Chat} />
             <Stack.Screen name="ContactList" component={ContactList} />
-            <Stack.Screen name="PetProfile" component={PetProfile} />
+            <Stack.Screen name="PetProfile" component={(route: any) => PetProfile(route)} />
           </Stack.Navigator>
         </AuthProvider>
       </SafeAreaProvider>

@@ -2,10 +2,10 @@ import { createContext, useState, useEffect, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { api } from '../api/axios';
 import { HttpStatusCode } from 'axios';
-import { User } from '@/@types/User';
 import { setToken, getToken } from '../service/tokenService';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProps } from '../navigator/navigator-simple-app';
+import { User } from '../@types/User';
 
 
 interface AuthProviderProps {
@@ -25,18 +25,16 @@ export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const navigation = useNavigation<NavigationProps>();
     const [user, setUser] = useState<User | null>(null);
+    
+
 
 
     const login = async (email: string, password: string) => {
-
-
         try {
             const { status, data } = await api.post('/auth/login', { email, password });
-
-
             if (status === HttpStatusCode.Ok) {
                 setToken(data?.token);
-                getUserByToken();
+                await getUserByToken();
                 navigation.navigate('Home');
                 return data;
             }

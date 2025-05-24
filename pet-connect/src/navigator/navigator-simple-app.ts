@@ -8,7 +8,7 @@ export type RootStackParamList = {
   UserProfile: undefined;
   Chat: undefined;
   ContactList: undefined;
-  PetProfile: undefined;
+  PetProfile: { petId: number } | undefined; 
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList, 'Login'>;

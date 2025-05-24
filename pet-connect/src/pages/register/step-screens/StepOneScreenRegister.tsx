@@ -1,5 +1,5 @@
-import { Errors } from "@/@types/Errors";
-import { FormData } from "@/@types/FormData";
+import { Errors } from "@/src/@types/Errors";
+import { FormData } from "@/src/@types/FormData";
 import InputComponent from "@/src/components/InputConnect";
 import React, { useState } from "react";
 import { Text, View } from "react-native";

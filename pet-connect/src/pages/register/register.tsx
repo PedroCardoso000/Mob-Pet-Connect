@@ -1,8 +1,8 @@
 import ButtonComponent from '@/src/components/ButtonConnect';
 import { useState } from 'react';
 import { Alert, Image, Text, TouchableOpacity, View } from 'react-native';
-import { Errors } from "../../../@types/Errors";
-import { FormData } from "../../../@types/FormData";
+import { Errors } from "../../@types/Errors";
+import { FormData } from "../../@types/FormData";
 import { registerStyles } from './register-style';
 import StepOneScreenRegister from './step-screens/StepOneScreenRegister';
 import StepTwoScreenRegister from './step-screens/StepTwoScreenRegister';

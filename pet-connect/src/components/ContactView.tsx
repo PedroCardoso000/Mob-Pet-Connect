@@ -1,5 +1,5 @@
 import { View, Image, StyleSheet, Text } from "react-native";
-import {Contact} from "@/@types/Contact"
+import {Contact} from "@/src/@types/Contact"
 import { navigate } from "../navigator/app_navigator";
 import { PagesNavigator } from "../navigator/pages-navigator";
 
