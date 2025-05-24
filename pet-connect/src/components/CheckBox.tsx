@@ -6,7 +6,7 @@ type PropsCheckBox = {
     onPress: (value: string) => void;
     selected: string;
     value: string;
-    label: string;
+    label?: string;
   };
   
   const CheckBox = ({ selected, value, label, onPress }: PropsCheckBox) => {

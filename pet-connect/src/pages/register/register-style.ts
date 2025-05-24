@@ -17,6 +17,11 @@ export const registerStyles = StyleSheet.create({
         height: 100,
         resizeMode: 'contain',
     },
+    cadastre: {
+        fontSize: 15,
+        color: '#499CFA',
+        marginTop: 10,
+    },
     title: {
         fontSize: 24,
         color: '#499CFA',
