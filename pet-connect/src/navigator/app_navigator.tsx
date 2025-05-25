@@ -1,9 +1,9 @@
 // import React, { useContext } from 'react';
-// import {
-//   createNavigationContainerRef,
-//   NavigationContainer
-// } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import {
+  createNavigationContainerRef,
+  NavigationContainer
+} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // import LoginScreen from '../pages/login/login';
 // import RegisterScreen from '../pages/register/register'; // importe sua tela de registro se tiver
@@ -12,32 +12,22 @@
 // import { Layout } from '../components/Layout';
 
 // import { AuthContext } from '../context/AuthContext';
-// import { PagesNavigator } from './pages-navigator';
+import { PagesNavigator } from './pages-navigator';
 // import Menu from '../pages/menu';
 // import { PetProfile } from '../pages/PetProfile';
 
-// export type RootStackParamList = {
-//   [PagesNavigator.Login]: undefined;
-//   [PagesNavigator.Register]: undefined;
-//   [PagesNavigator.ContactList]: undefined;
-//   [PagesNavigator.Chat]: undefined;
-//   [PagesNavigator.Layout]: undefined;
-//   [PagesNavigator.Menu]: undefined;
-//   [PagesNavigator.PetProfile]: undefined;
-// };
+export type RootStackParamList = {
+  [PagesNavigator.Login]: undefined;
+  [PagesNavigator.Register]: undefined;
+  [PagesNavigator.CreatePet]: undefined;
+  [PagesNavigator.ContactList]: undefined;
+  [PagesNavigator.Chat]: undefined;
+  [PagesNavigator.Layout]: undefined;
+  [PagesNavigator.Menu]: undefined;
+  [PagesNavigator.PetProfile]: {petId: number};
+  [PagesNavigator.UserProfile]: undefined;
+};
 
-// const Stack = createNativeStackNavigator<RootStackParamList>();
-
-// export const navigationRef = createNavigationContainerRef<RootStackParamList>();
-
-// export function navigate<T extends keyof RootStackParamList>(
-//   name: T,
-//   params?: RootStackParamList[T]
-// ) {
-//   if (navigationRef.isReady()) {
-//     (navigationRef.navigate as any)(name, params);
-//   }
-// }
 
 // const AppNavigator = () => {
 //   const { user, loading } = useContext(AuthContext);

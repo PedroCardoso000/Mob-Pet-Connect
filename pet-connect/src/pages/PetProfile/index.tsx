@@ -1,8 +1,7 @@
-import type React from "react"
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 import { usePet } from "./hooks/usePet";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "@/src/context/AuthContext";
 import { api } from "@/src/api/axios";
 import { NavigationProps } from "@/src/navigator/navigator-simple-app";
@@ -10,21 +9,16 @@ import { useNavigation } from "@react-navigation/native";
 const exampleUser = require("@/assets/user.png");
 const exampleDog = require("@/assets/dog.jpg");
 
-
-
-
-export default function PetProfile({ route }: PropsPetProfile) {
+export default function PetProfile({ route }: any) {
   const navigation = useNavigation<NavigationProps>();
-  const { userPet } = usePet(route.params);
+  const { userPet } = usePet(route.params.petId);
 
   const { user } = useContext(AuthContext);
-  
-  // const userObject  = getUserByToken();
 
   async function match(sender: number, receiver: number) {
     try {
-      const { data } = await api.post("/chat-room", { sender, receiver });
-      navigation.replace("ContactList");
+      await api.post("/chat-room", { sender, receiver });
+      navigation.navigate("ContactList");
     } catch (error) {
       console.log(error);
     }

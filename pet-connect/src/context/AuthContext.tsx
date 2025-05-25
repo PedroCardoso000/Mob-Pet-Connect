@@ -25,9 +25,6 @@ export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 export const AuthProvider = ({ children }: AuthProviderProps) => {
     const navigation = useNavigation<NavigationProps>();
     const [user, setUser] = useState<User | null>(null);
-    
-
-
 
     const login = async (email: string, password: string) => {
         try {

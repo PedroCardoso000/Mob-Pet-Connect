@@ -1,5 +1,6 @@
 import { Pet } from "@/src/@types/Pet";
 import { NavigationProps } from "@/src/navigator/navigator-simple-app";
+import { PagesNavigator } from "@/src/navigator/pages-navigator";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
@@ -30,7 +31,7 @@ type Props = {
 export function MenuPet({pet}: Props) {
   const navigation = useNavigation<NavigationProps>();
   return (
-    <View style={style.view} onTouchEnd={() => navigation.replace("PetProfile")}>  
+    <View style={style.view} onTouchEnd={() => navigation.navigate(PagesNavigator.PetProfile, {petId: pet.id})}>  
         <Image
           source={exampleDog}
           style={style.image}          
