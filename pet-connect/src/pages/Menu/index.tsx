@@ -3,6 +3,8 @@ import { PetList } from "./PetList";
 import { useEffect, useState } from "react";
 import { Pet } from "@/src/@types/Pet";
 import { api } from "@/src/api/axios";
+import { View } from "react-native";
+import { Footer } from "@/src/components/Footer";
 
 export default function Menu() {
 
@@ -23,8 +25,8 @@ export default function Menu() {
 
 
   return (
-    <>
+    <View>
       <PetList pets={pets}/>
-    </>
+    </View>
   )
 }
