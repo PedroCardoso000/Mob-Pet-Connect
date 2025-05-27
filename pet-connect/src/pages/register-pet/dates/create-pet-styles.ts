@@ -20,10 +20,10 @@ export const styleRegister = StyleSheet.create({
     checkboxContainer: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-around", // Para distribuir os checkboxes uniformemente
+      justifyContent: "space-around",
       width: "100%",
       marginVertical: 10,
-  },
+    },
     backButtonText: {
       fontSize: 24,
       color: "#666",

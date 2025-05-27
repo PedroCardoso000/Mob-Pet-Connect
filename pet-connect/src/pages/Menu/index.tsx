@@ -1,14 +1,48 @@
-import { MenuPet } from "@/components/MenuPet";
 import { PetList } from "./PetList";
 import { useEffect, useState } from "react";
 import { Pet } from "@/src/@types/Pet";
 import { api } from "@/src/api/axios";
 import { View } from "react-native";
-import { Footer } from "@/src/components/Footer";
+import { PetFilter } from "./PetFilter";
+
+export type FilterOptions = {
+  petInput: string,
+  selectedRace: string | null,
+  male: boolean,
+  female: boolean
+}
+
+const initialFilterState: FilterOptions = {
+  petInput: "",
+  selectedRace: null,
+  male: true,
+  female: true
+}
 
 export default function Menu() {
 
   const [pets, setPets] = useState<Pet[]>([]);
+  const [filterOptions, setFilterOptions] = useState<FilterOptions>(initialFilterState);
+
+  function getFilteredPets() {
+    const petInputFilter = ({ name }: Pet) =>
+      filterOptions.petInput ? name.includes(filterOptions.petInput) : true
+
+    const selectRaceFilter = ({ race }: Pet) =>
+      filterOptions.selectedRace ? race === filterOptions.selectedRace : true
+
+    const genderFilter = ({ gender }: Pet) => {
+      if(filterOptions.male && filterOptions.female) return true
+      if(filterOptions.male) return gender === "MALE"
+      if(filterOptions.female) return gender === "FEMALE"
+      return false
+    }
+      
+    return pets
+      .filter(petInputFilter)
+      .filter(selectRaceFilter)
+      .filter(genderFilter)
+  }
 
   async function fetchPets() {
     try {
@@ -23,10 +57,13 @@ export default function Menu() {
     fetchPets();
   }, [])
 
-
   return (
     <View>
-      <PetList pets={pets}/>
+      <PetFilter
+      pets={pets}
+      filterOptions={filterOptions}
+      setFilterOptions={setFilterOptions}/>
+      <PetList pets={getFilteredPets()}/>
     </View>
   )
 }

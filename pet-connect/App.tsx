@@ -50,7 +50,7 @@ function RootStack() {
     <Stack.Navigator initialRouteName={PagesNavigator.Login}>
       <Stack.Screen options={{headerShown: false}} name={PagesNavigator.Login} component={LoginScreen} />
       <Stack.Screen name={PagesNavigator.UserProfile} component={UserProfileScreen}/>
-      <Stack.Screen name={PagesNavigator.Menu} component={Menu} />
+      <Stack.Screen name={PagesNavigator.Menu} component={Menu} options={{headerShown: false}} />
       <Stack.Screen name={PagesNavigator.Register} component={RegisterScreen} />
       <Stack.Screen name={PagesNavigator.Chat} component={Chat} />
       <Stack.Screen name={PagesNavigator.CreatePet} component={CreatePet}/>
