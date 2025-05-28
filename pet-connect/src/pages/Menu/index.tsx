@@ -1,9 +1,10 @@
-import { PetList } from "./PetList";
 import { useEffect, useState } from "react";
 import { Pet } from "@/src/@types/Pet";
 import { api } from "@/src/api/axios";
 import { View } from "react-native";
-import { PetFilter } from "./PetFilter";
+import { PetFilter } from "@/src/pages/menu/PetFilter";
+import { PetList } from "@/src/pages/menu/PetList";
+import Loading from "@/src/components/Loading";
 
 export type FilterOptions = {
   petInput: string,
@@ -20,7 +21,7 @@ const initialFilterState: FilterOptions = {
 }
 
 export default function Menu() {
-
+  const [isLoading, setIsLoading] = useState(false);
   const [pets, setPets] = useState<Pet[]>([]);
   const [filterOptions, setFilterOptions] = useState<FilterOptions>(initialFilterState);
 
@@ -46,16 +47,21 @@ export default function Menu() {
 
   async function fetchPets() {
     try {
+      setIsLoading(true);
       const response = await api.get("/pet");
       setPets(response.data);
     } catch(err) {
       console.log(err)
+    }finally {
+      setIsLoading(false);
     }
   }
 
   useEffect(() => {
     fetchPets();
   }, [])
+
+ if (isLoading) return <Loading />; 
 
   return (
     <View>

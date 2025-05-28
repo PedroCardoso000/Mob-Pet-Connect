@@ -35,13 +35,12 @@ const styles = StyleSheet.create({
 
 export function ChatHeader() {
   const navigation = useNavigation<NavigationProps>();
-  // onPressOut={() => navigation.re(PagesNavigator.ContactList)}>
   return (
     <>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <View style={styles.container}>
         <View style={styles.leftSection}>
-          <TouchableOpacity >
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
             <AntDesign name="arrowleft" size={24} color="black" />
           </TouchableOpacity>
         </View>

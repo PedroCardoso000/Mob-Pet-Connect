@@ -8,7 +8,12 @@ import { ChatFooter } from "./ChatFooter";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    padding: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    backgroundColor: "#fff",
+    paddingHorizontal: (10),
   },
   scrollView: {
     flex: 1,
@@ -59,5 +64,9 @@ export function Chat() {
       </KeyboardAvoidingView>
     </SafeAreaView> 
   )
+}
+
+function scaleSize(arg0: number): any {
+  throw new Error("Function not implemented.");
 }
 

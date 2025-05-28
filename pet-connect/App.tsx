@@ -1,6 +1,6 @@
 import "@/global.css";
 import LoginScreen from "./src/pages/login/login";
-import Menu from "./src/pages/Menu";
+import Menu from "./src/pages/menu";
 import { AuthContext, AuthProvider } from "./src/context/AuthContext";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
@@ -49,13 +49,13 @@ function RootStack() {
   return (
     <Stack.Navigator initialRouteName={PagesNavigator.Login}>
       <Stack.Screen options={{headerShown: false}} name={PagesNavigator.Login} component={LoginScreen} />
-      <Stack.Screen name={PagesNavigator.UserProfile} component={UserProfileScreen}/>
-      <Stack.Screen name={PagesNavigator.Menu} component={Menu} options={{headerShown: false}} />
-      <Stack.Screen name={PagesNavigator.Register} component={RegisterScreen} />
-      <Stack.Screen name={PagesNavigator.Chat} component={Chat} />
-      <Stack.Screen name={PagesNavigator.CreatePet} component={CreatePet}/>
-      <Stack.Screen name={PagesNavigator.ContactList} component={ContactList} />
-      <Stack.Screen name={PagesNavigator.PetProfile} component={PetProfile} />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.UserProfile} component={UserProfileScreen}/>
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Menu} component={Menu}  />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Register} component={RegisterScreen} />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Chat} component={Chat} />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.CreatePet} component={CreatePet}/>
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.ContactList} component={ContactList} />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.PetProfile} component={PetProfile} />
     </Stack.Navigator>
   )
 }

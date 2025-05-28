@@ -8,6 +8,8 @@ import { api } from '@/src/api/axios';
 import { HttpStatusCode } from 'axios';
 import ButtonComponent from '@/src/components/ButtonConnect';
 import { MainLayout } from '@/src/components/MainLayout';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationProps } from '@/src/navigator/navigator-simple-app';
 
 
 
@@ -17,9 +19,8 @@ import { MainLayout } from '@/src/components/MainLayout';
 
 const UserProfileScreen = () => {
   const { user } = useContext(AuthContext);
+  const navigation = useNavigation<NavigationProps>();
 
-
-  console.log(user);
 
 
   const profileData = {
@@ -50,7 +51,6 @@ const UserProfileScreen = () => {
 
   return (
     <>
-      <MainLayout>
         <View style={userScreenStyles.container}>
           {/* ✅ HEADER */}
           <View style={userScreenStyles.header}>
@@ -68,7 +68,6 @@ const UserProfileScreen = () => {
 
 
           <View style={userScreenStyles.textContainer}>
-            <Text style={userScreenStyles.bio}>{profileData.bio}</Text>
             <SmallText>{profileData.description}</SmallText>
           </View>
 
@@ -76,7 +75,7 @@ const UserProfileScreen = () => {
 
             <View style={userScreenStyles.statButton}>
               <SmallText>Adicionar mais Pets</SmallText>
-              <TouchableOpacity style={userScreenStyles.editButton}>
+              <TouchableOpacity style={userScreenStyles.editButton} onPress={() =>  navigation.navigate('CreatePet')}>
                 <Image
                   source={require('../../../assets/addPet.png')}
                   style={{ width: 20, height: 20, borderColor: 'none' }}
@@ -100,7 +99,6 @@ const UserProfileScreen = () => {
           />
           {/* <ButtonComponent title="Entrar" onPress={() => getUserByPk(token)} /> */}
         </View>
-      </MainLayout>
     </>
   )
 };
