@@ -1,29 +1,38 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 import { usePet } from "./hooks/usePet";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/src/context/AuthContext";
 import { api } from "@/src/api/axios";
 import { NavigationProps } from "@/src/navigator/navigator-simple-app";
 import { useNavigation } from "@react-navigation/native";
+import Loading from "@/src/components/Loading";
 const exampleUser = require("@/assets/user.png");
 const exampleDog = require("@/assets/dog.jpg");
 
 export default function PetProfile({ route }: any) {
   const navigation = useNavigation<NavigationProps>();
   const { userPet } = usePet(route.params.petId);
-
+  const [isLoading, setIsLoading] = useState(false);
   const { user } = useContext(AuthContext);
+
+
+
 
   async function match(sender: number, receiver: number) {
     try {
+      setIsLoading(true);
+      if(sender === receiver) console.warn("Não é possível fazer match consigo mesmo.");
       await api.post("/chat-room", { sender, receiver });
       navigation.navigate("ContactList");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   }
 
+  if (isLoading) return <Loading />;
   return (
     <ScrollView style={styles.container}>
       <Image source={exampleDog} style={styles.petImage} />
@@ -45,14 +54,24 @@ export default function PetProfile({ route }: any) {
 
         <TouchableOpacity
           style={styles.matchButton}
-         onPressOut={ () => match(user!.id, userPet!.user.id) }>
+          onPressOut={() => {
+            if (user?.id && userPet?.userId) {
+              console.log("Match request initiated", user, userPet);
+              
+              match(user.id, userPet.userId);
+            } else {
+              console.warn("Usuário não está logado ou dados do pet estão incompletos.", user, userPet);
+            }
+          }}
+        >
           <Text style={styles.matchButtonText}>Match</Text>
         </TouchableOpacity>
-  
+
+
         <View style={styles.ownerContainer}>
           <Image source={exampleUser} style={styles.ownerImage} />
           <View style={styles.ownerInfo}>
-            <Text style={styles.ownerName}>{userPet?.user.name}</Text>
+            <Text style={styles.ownerName}>{userPet?.user?.name}</Text>
           </View>
         </View>
       </View>
