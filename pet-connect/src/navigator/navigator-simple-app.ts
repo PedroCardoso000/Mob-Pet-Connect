@@ -6,7 +6,7 @@ export type RootStackParamList = {
   Profile: undefined;
   Register: undefined;
   UserProfile: undefined;
-  Chat: undefined;
+  Chat: { receiverId: number };
   ContactList: undefined;
   PetProfile: { petId: number } | undefined;
   CreatePet: undefined 

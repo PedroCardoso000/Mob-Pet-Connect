@@ -7,6 +7,7 @@ import { api } from "@/src/api/axios";
 import { NavigationProps } from "@/src/navigator/navigator-simple-app";
 import { useNavigation } from "@react-navigation/native";
 import Loading from "@/src/components/Loading";
+import { sendNotification } from "@/src/log/chatSocket";
 const exampleUser = require("@/assets/user.png");
 const exampleDog = require("@/assets/dog.jpg");
 
@@ -24,7 +25,10 @@ export default function PetProfile({ route }: any) {
       setIsLoading(true);
       if(sender === receiver) console.warn("Não é possível fazer match consigo mesmo.");
       await api.post("/chat-room", { sender, receiver });
-      navigation.navigate("Chat");
+      sendNotification(sender, receiver, "Iniciaram uma nova conversa com você.");
+      navigation.navigate("Chat", {
+        receiverId: receiver,
+      });
     } catch (error) {
       console.log(error);
     } finally {

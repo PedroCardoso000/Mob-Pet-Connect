@@ -1,12 +1,12 @@
 import InputConnect from "@/src/components/InputConnect";
-import React from "react";
-import { TouchableOpacity, View, StyleSheet } from "react-native";
+import React, { useState } from "react";
+import { TouchableOpacity, View, StyleSheet, TextInput } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
 const styles = StyleSheet.create({
   inputContainer: {
-    height: 72,
+    height: 62,
     flexDirection: "row",
     alignItems: "center",
     borderTopWidth: 1,
@@ -26,13 +26,38 @@ const styles = StyleSheet.create({
   },
 })
 
-export function ChatFooter() {
+type Props = {
+  onSend: (content: string) => void;
+};
+
+export function ChatFooter({ onSend }: Props) {
+  const [message, setMessage] = useState("");
+
   return (
     <View style={styles.inputContainer}>
-          <InputConnect styleInput={styles.input} placeholder="Insira sua mensagem"/>
-          <TouchableOpacity>
-            <Ionicons style={styles.sendButton} name="send" size={24} color="black" />
-          </TouchableOpacity>
+      <TextInput
+        style={styles.input}
+        placeholder="Insira sua mensagem"
+        value={message}
+        onChangeText={setMessage}
+        onSubmitEditing={() => {
+          if (message.trim()) {
+            onSend(message);
+            setMessage("");
+          }
+        }}
+      />
+      <TouchableOpacity
+        onPress={() => {
+          if (message.trim()) {
+            onSend(message);
+            setMessage("");
+          }
+        }}
+      >
+        <Ionicons style={styles.sendButton} name="send" size={24} color="black" />
+      </TouchableOpacity>
     </View>
-  )
+  );
 }
+

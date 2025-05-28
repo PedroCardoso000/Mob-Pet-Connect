@@ -1,9 +1,11 @@
 import { ChatHeader } from "./ChatHeader"
-import { View, ScrollView, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform , Text, TouchableOpacity} from "react-native"
+import { View, ScrollView, StyleSheet, SafeAreaView, KeyboardAvoidingView, Platform, Text, TouchableOpacity } from "react-native"
 import { Message } from "./Message"
-import InputConnect from "@/src/components/InputConnect"
-import Ionicons from '@expo/vector-icons/Ionicons';
 import { ChatFooter } from "./ChatFooter";
+import { useContext, useEffect, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+import { AuthContext } from "@/src/context/AuthContext";
+import { connectChat, disconnectChat, sendMessage } from "@/src/log/chatSocket";
 
 const styles = StyleSheet.create({
   container: {
@@ -21,52 +23,62 @@ const styles = StyleSheet.create({
   },
 })
 
+
 export function Chat() {
-  const messages = [
-    { text: "Oi, tenho interesse no seu Retriever!", fromUser: true },
-    { text: "Opa, beleza? Vamos conversar então", fromUser: false },
-    { text: "Vamos!", fromUser: true },
-    { text: "Oi, tenho interesse no seu Retriever!", fromUser: true },
-    { text: "Opa, beleza? Vamos conversar então", fromUser: false },
-    { text: "Vamos!", fromUser: true },
-    { text: "Oi, tenho interesse no seu Retriever!", fromUser: true },
-    { text: "Opa, beleza? Vamos conversar então", fromUser: false },
-    { text: "Vamos!", fromUser: true },
-    { text: "Oi, tenho interesse no seu Retriever!", fromUser: true },
-    { text: "Opa, beleza? Vamos conversar então", fromUser: false },
-    { text: "Vamos!", fromUser: true },
-    { text: "Oi, tenho interesse no seu Retriever!", fromUser: true },
-    { text: "Opa, beleza? Vamos conversar então", fromUser: false },
-    { text: "Vamos!", fromUser: true },
-    { text: "Oi, tenho interesse no seu Retriever!", fromUser: true },
-    { text: "Opa, beleza? Vamos conversar então", fromUser: false },
-    { text: "Vamos!", fromUser: true },
-  ]
+  const { user } = useContext(AuthContext);
+  const route = useRoute();
+  const { receiverId } = route.params as { receiverId: number };
+
+  const [messages, setMessages] = useState<{ fromUser: boolean; text: string }[]>([]);
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    connectChat(
+      user.id,
+      (msg) => {
+        const isFromUser = msg.sender === user.id;
+        setMessages((prev) => [...prev, { text: msg.content, fromUser: isFromUser }]);
+      },
+      (notification) => {
+        alert(`🔔 Notificação: ${notification.content}`);
+      }
+    );
+
+    return () => {
+      disconnectChat();
+    };
+  }, [user]);
+
+  function handleSend(content: string) {
+    if (!user?.id || !receiverId) {
+      console.warn("Usuário ou receiverId indefinido");
+      return;
+    }
+
+    console.log("Enviando mensagem:", content);
+    sendMessage(user.id, receiverId, content);
+
+    setMessages((prev) => [...prev, { text: content, fromUser: true }]);
+
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
-      >
-        <ChatHeader/>
-        <ScrollView
-          style={styles.scrollView}
-          contentContainerStyle={{ paddingBottom: 20 }}
-          showsVerticalScrollIndicator={false}
-        >
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
+        <ChatHeader />
+        <ScrollView style={styles.scrollView}>
           {messages.map((message, idx) => (
             <Message key={idx} message={message} />
           ))}
         </ScrollView>
-        <ChatFooter/>
+        <ChatFooter onSend={handleSend} />
       </KeyboardAvoidingView>
-    </SafeAreaView> 
-  )
+    </SafeAreaView>
+  );
 }
 
-function scaleSize(arg0: number): any {
-  throw new Error("Function not implemented.");
-}
+
+
+
 
