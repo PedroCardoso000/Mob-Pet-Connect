@@ -24,7 +24,7 @@ export default function PetProfile({ route }: any) {
       setIsLoading(true);
       if(sender === receiver) console.warn("Não é possível fazer match consigo mesmo.");
       await api.post("/chat-room", { sender, receiver });
-      navigation.navigate("ContactList");
+      navigation.navigate("Chat");
     } catch (error) {
       console.log(error);
     } finally {

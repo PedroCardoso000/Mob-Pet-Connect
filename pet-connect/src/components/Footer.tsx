@@ -123,7 +123,7 @@ export function Footer() {
 
       <Pressable
         style={styles.itemView}
-        onPress={() => handlePress(PagesNavigator.Chat)}
+        onPress={() => handlePress(PagesNavigator.ContactList)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.itemContent}>
@@ -131,7 +131,7 @@ export function Footer() {
             <MaterialCommunityIcons name="message" size={24} color="black" />
           </View>
           <Text style={styles.itemText}>Chat</Text>
-          {routeName === 'Chat' && <View style={styles.selectedIndicator} />}
+          {routeName === 'ContactList' && <View style={styles.selectedIndicator} />}
         </View>
       </Pressable>
 
