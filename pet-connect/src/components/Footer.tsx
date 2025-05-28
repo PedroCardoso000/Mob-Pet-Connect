@@ -5,7 +5,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useContext, useState } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useNavigationState } from "@react-navigation/native";
 import { NavigationProps } from "../navigator/navigator-simple-app";
 import { PagesNavigator } from "../navigator/pages-navigator";
 import { AuthContext } from "../context/AuthContext";
@@ -61,84 +61,88 @@ const styles = StyleSheet.create({
 
 export function Footer() {
   const navigation = useNavigation<NavigationProps>();
-  const [selectedTab, setSelectedTab] = useState(PagesNavigator.Menu);
+  const routeName = useNavigationState((state) => {
+    if (!state || !state.routes || state.index == null) return null;
+    return state.routes[state.index]?.name;
+  });
+
   const { user } = useContext(AuthContext);
 
   const handlePress = (page: PagesNavigator) => {
-    setSelectedTab(page);
     navigation.navigate(page as any);
   };
 
-  if(!user) {
+
+  if (!user) {
     return <></>
   }
 
   return (
     <View style={styles.footerContainer}>
-      <Pressable 
+      <Pressable
         style={styles.itemView}
         onPress={() => handlePress(PagesNavigator.Menu)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.itemContent}>
           <View style={styles.iconContainer}>
-            <Foundation name="home" size={24} color="black"/>
+            <Foundation name="home" size={24} color="black" />
           </View>
           <Text style={styles.itemText}>Home</Text>
-          {selectedTab === 'Home' && <View style={styles.selectedIndicator} />}
+          {routeName === 'Home' && <View style={styles.selectedIndicator} />}
         </View>
       </Pressable>
-      
-      <Pressable 
+
+      <Pressable
         style={styles.itemView}
         onPress={() => handlePress(PagesNavigator.UserProfile)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.itemContent}>
           <View style={styles.iconContainer}>
-            <FontAwesome name="user" size={24} color="black"/>
+            <FontAwesome name="user" size={24} color="black" />
           </View>
           <Text style={styles.itemText}>Perfil</Text>
-          {selectedTab === 'UserProfile' && <View style={styles.selectedIndicator} />}
+          {routeName === 'UserProfile' && <View style={styles.selectedIndicator} />}
         </View>
       </Pressable>
-      
-      <Pressable 
+
+      <Pressable
         style={styles.itemView}
         onPress={() => handlePress(PagesNavigator.CreatePet)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.itemContent}>
           <View style={styles.iconContainer}>
-            <Ionicons name="add-circle" size={24} color="black"/>
+            <Ionicons name="add-circle" size={24} color="black" />
           </View>
           <Text style={styles.itemText}>Pet</Text>
-          {selectedTab === 'PetProfile' && <View style={styles.selectedIndicator} />}
+          {routeName === 'PetProfile' && <View style={styles.selectedIndicator} />}
         </View>
       </Pressable>
-      
-      <Pressable 
+
+      <Pressable
         style={styles.itemView}
         onPress={() => handlePress(PagesNavigator.Chat)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.itemContent}>
           <View style={styles.iconContainer}>
-            <MaterialCommunityIcons name="message" size={24} color="black"/>
+            <MaterialCommunityIcons name="message" size={24} color="black" />
           </View>
           <Text style={styles.itemText}>Chat</Text>
-          {selectedTab === 'Chat' && <View style={styles.selectedIndicator} />}
+          {routeName === 'Chat' && <View style={styles.selectedIndicator} />}
         </View>
       </Pressable>
-      
-      <Pressable 
+
+      <Pressable
         style={styles.itemView}
-        onPress={() => {}}
+        onPress={() => { }}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.itemContent}>
           <View style={styles.iconContainer}>
-            <MaterialIcons name="settings" size={24} color="black"/>
+            <MaterialIcons name="settings" size={24} color="black" />
           </View>
           <Text style={styles.itemText}>Opções</Text>
           {/* {selectedTab === 'Settings' && <View style={styles.selectedIndicator} />} */}
