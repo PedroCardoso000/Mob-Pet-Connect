@@ -1,6 +1,5 @@
 import { View, Image, StyleSheet, Text } from "react-native";
 import {Contact} from "@/src/@types/Contact"
-import { navigate } from "../navigator/app_navigator";
 import { PagesNavigator } from "../navigator/pages-navigator";
 
 const examplePerson = require("@/assets/user.png");
@@ -32,11 +31,7 @@ type Props = {
 
 export function ContactView({contact}: Props) {
   return (
-    <View onTouchEnd={() => navigate(PagesNavigator.Chat)} style={style.view}>
-      <Image
-      source={examplePerson}
-      style={style.image}
-      />
+    <View onTouchMove={() => console.log("onTouchMove")}  style={style.view}>
       <Text style={style.nameText}>{contact.name}</Text>
     </View>
   )
