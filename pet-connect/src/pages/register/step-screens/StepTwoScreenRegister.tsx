@@ -6,13 +6,6 @@ import { FormData } from "@/src/@types/FormData";
 import InputComponent from "@/src/components/InputConnect";
 
 const StepTwoScreenRegister = (props: any) => {
-    // const [formData, setFormData] = useState<FormData>({
-    //     nome: '',
-    //     email: '',
-    //     telefone: '',
-    //     senha: '',
-    //     confirmarSenha: ''
-    // });
 
     const [errors, setErrors] = useState<Errors>({});
     return (

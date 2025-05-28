@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { PagesNavigator } from './pages-navigator';
-import Menu from '../pages/Menu';
+import Menu from '../pages/menu';
 import Foundation from "@expo/vector-icons/Foundation"
 import { StyleSheet } from 'react-native';
 
