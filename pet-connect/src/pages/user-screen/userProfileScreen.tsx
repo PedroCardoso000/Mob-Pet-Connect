@@ -50,7 +50,6 @@ const UserProfileScreen = () => {
 
   return (
     <>
-      <MainLayout>
         <View style={userScreenStyles.container}>
           {/* ✅ HEADER */}
           <View style={userScreenStyles.header}>
@@ -68,7 +67,6 @@ const UserProfileScreen = () => {
 
 
           <View style={userScreenStyles.textContainer}>
-            <Text style={userScreenStyles.bio}>{profileData.bio}</Text>
             <SmallText>{profileData.description}</SmallText>
           </View>
 
@@ -100,7 +98,6 @@ const UserProfileScreen = () => {
           />
           {/* <ButtonComponent title="Entrar" onPress={() => getUserByPk(token)} /> */}
         </View>
-      </MainLayout>
     </>
   )
 };

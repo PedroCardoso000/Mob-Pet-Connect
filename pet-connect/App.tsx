@@ -1,6 +1,6 @@
 import "@/global.css";
 import LoginScreen from "./src/pages/login/login";
-import Menu from "./src/pages/Menu";
+import Menu from "./src/pages/menu";
 import { AuthContext, AuthProvider } from "./src/context/AuthContext";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {

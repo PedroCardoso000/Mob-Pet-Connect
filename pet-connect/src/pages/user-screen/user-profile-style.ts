@@ -9,7 +9,7 @@ const scaleFont = (size : any) => size * PixelRatio.getFontScale();
 export const userScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
+    padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
 
