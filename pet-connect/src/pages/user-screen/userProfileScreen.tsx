@@ -88,6 +88,8 @@ const UserProfileScreen = () => {
           <SmallText>{profileData.description}</SmallText>
         </View>
 
+        <View style={userScreenStyles.divider} />
+
         <View style={userScreenStyles.statsRow}>
           <View style={userScreenStyles.statButton}>
             <SmallText>Adicionar mais Pets</SmallText>
@@ -114,6 +116,8 @@ const UserProfileScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+
+        <View style={userScreenStyles.divider} />
 
         <Text style={userScreenStyles.sectionTitle}>Meus Pets</Text>
 
