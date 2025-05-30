@@ -99,7 +99,7 @@ const CreatePet = () => {
         try {
             const { status, data } = await api.post('/pet', {
                 name: petData.nome,
-                gender: "Male",
+                gender: sex,
                 birthDate: new Date(),
                 specie: petData.especieNome,
                 race: petData.racaNome
