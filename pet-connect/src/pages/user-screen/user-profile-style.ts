@@ -4,20 +4,16 @@ const { width, height } = Dimensions.get("window");
 
 // 🔹 Escalando valores para diferentes telas
 const scaleSize = (size: any) => (size / 375) * width; // 375px é o tamanho padrão do iPhone X
-const scaleFont = (size : any) => size * PixelRatio.getFontScale();
+const scaleFont = (size: any) => size * PixelRatio.getFontScale();
 
 export const userScreenStyles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-
     backgroundColor: "#fff",
     paddingHorizontal: scaleSize(10),
+    paddingTop: scaleSize(40),
   },
 
-  // ✅ HEADER
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -36,90 +32,90 @@ export const userScreenStyles = StyleSheet.create({
     fontSize: scaleFont(18),
     fontWeight: "bold",
   },
+  formrow: {
+    flexDirection: "row",
+    gap: scaleSize(5),
+  },
+  statusUser: {
+    width: scaleSize(10),
+    height: scaleSize(10),
+    borderRadius: scaleSize(5),
+    backgroundColor: "green",
+    marginTop: scaleSize(5),
+  },
+
+  textContainer: {
+    marginBottom: scaleSize(10),
+  },
+  divider: {
+    width: "100%",
+    height: 1,
+    backgroundColor: "#eee",
+    marginVertical: scaleSize(15),
+  },
 
   statsRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
-  
+    justifyContent: "center",
+    display: "flex",
     gap: scaleSize(10),
     marginTop: scaleSize(8),
   },
-  stat: {
-    alignItems: "center",
-  },
-  statNumber: {
-    fontSize: scaleFont(16),
-    fontWeight: "bold",
-  },
-
   statButton: {
-    alignItems: "center",
     flexDirection: "row",
-    gap: 5
-  },
 
+    alignItems: "center",
+    gap: 5,
+  },
   editButton: {
     paddingVertical: scaleSize(8),
     borderRadius: scaleSize(5),
     alignItems: "center",
     marginVertical: scaleSize(10),
   },
-  editButtonText: {
-    fontSize: scaleFont(14),
+
+  sectionTitle: {
+    fontSize: scaleFont(16),
     fontWeight: "bold",
-  },
-
-  bio: {
-    textAlign: "left",
-    fontSize: scaleFont(14),
-    marginVertical: scaleSize(5),
-  },
-  
-  textContainer: {
-    display: "flex",
-    flexDirection: "column",
-    textAlign: "left",
-  },
-
-  highlightsList: {
-    marginVertical: scaleSize(10),
-  },
-  highlight: {
-    width: scaleSize(60),
-    height: scaleSize(60),
-    borderRadius: scaleSize(30),
-    marginHorizontal: scaleSize(5),
-    borderWidth: 1,
-    borderColor: "#ddd",
+    marginBottom: scaleSize(8),
+    alignSelf: "flex-start",
   },
 
   feed: {
     marginTop: scaleSize(10),
   },
+  feedContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "flex-start", // Alinha à esquerda
+    gap: scaleSize(10),
+    paddingBottom: scaleSize(20),
+  },
 
   feedItem: {
+    width: "30%",
     alignItems: "center",
-    margin: scaleSize(5),
-    width: "30%", // Cada item ocupa 30% da largura da tela
+    marginBottom: scaleSize(15),
+    backgroundColor: "#f9f9f9",
+    borderRadius: scaleSize(10),
+    padding: scaleSize(10),
   },
 
   feedImage: {
-    width: width * 0.25, // 25% da largura da tela
-    height: height * 0.15, // 15% da altura da tela
+    width: width * 0.25,
+    height: height * 0.15,
     borderRadius: scaleSize(10),
-    alignSelf: "center",
+    marginBottom: scaleSize(8),
   },
 
-  statusUser: {
-    width: scaleSize(10),
-    height: scaleSize(10),
-    borderRadius: scaleSize(5),
-    marginTop: scaleSize(5),
-    backgroundColor: "green",
+  feedText: {
+    textAlign: "center",
   },
-  formrow:{
-    display: "flex",
-    flexDirection: "row",
-    gap: scaleSize(5),
-  }
+  scrollContainer: {
+    paddingVertical: scaleSize(20),
+    alignItems: "center",
+  },
+
+
 });
+
