@@ -1,4 +1,4 @@
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, Pressable, StyleSheet, Text, View } from "react-native";
 import { Pet } from "@/@types/Pet";
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../navigator/navigator-simple-app";
@@ -30,16 +30,18 @@ type Props = {
 export function MenuPet({pet}: Props) {
   const navigation = useNavigation<NavigationProps>();
   return (
-    <View style={style.view} onTouchEnd={() => navigation.replace("Home")}>  
-        <Image
-          source={exampleDog}
-          style={style.image}          
-          borderRadius={4}      
-        />
-        <View style={style.imageTextView}>
-          <Text>{pet.name} ({pet.gender === "FEMALE" ? "F" : "M"})</Text>
-          <Text>{pet.race}</Text>
-        </View>
-    </View>
+    <Pressable>
+      <View style={style.view} onTouchEnd={() => navigation.replace("Home")}>  
+          <Image
+            source={exampleDog}
+            style={style.image}          
+            borderRadius={4}      
+          />
+          <View style={style.imageTextView}>
+            <Text>{pet.name} ({pet.gender === "FEMALE" ? "F" : "M"})</Text>
+            <Text>{pet.race}</Text>
+          </View>
+      </View>
+    </Pressable>
   )
 }

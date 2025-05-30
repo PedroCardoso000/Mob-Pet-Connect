@@ -2,12 +2,12 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "rea
 import { Ionicons } from "@expo/vector-icons"
 import { usePet } from "./hooks/usePet";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "@/src/context/AuthContext";
-import { api } from "@/src/api/axios";
-import { NavigationProps } from "@/src/navigator/navigator-simple-app";
+import { AuthContext } from "../../context/AuthContext";
+import { api } from "../../api/axios";
+import { NavigationProps } from "../../navigator/navigator-simple-app";
 import { useNavigation } from "@react-navigation/native";
-import Loading from "@/src/components/Loading";
-import { sendNotification } from "@/src/log/chatSocket";
+import Loading from "../../components/Loading";
+import { sendNotification } from "../../log/chatSocket";
 const exampleUser = require("@/assets/user.png");
 const exampleDog = require("@/assets/dog.jpg");
 
@@ -17,15 +17,11 @@ export default function PetProfile({ route }: any) {
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useContext(AuthContext);
 
-
-
-
   async function match(sender: number, receiver: number) {
     try {
       setIsLoading(true);
-      if(sender === receiver) console.warn("Não é possível fazer match consigo mesmo.");
+      if(sender === receiver) return console.warn("Não é possível fazer match consigo mesmo.");
       await api.post("/chat-room", { sender, receiver });
-      sendNotification(sender, receiver, "Iniciaram uma nova conversa com você.");
       navigation.navigate("Chat", {
         receiverId: receiver,
       });
@@ -58,15 +54,7 @@ export default function PetProfile({ route }: any) {
 
         <TouchableOpacity
           style={styles.matchButton}
-          onPressOut={() => {
-            if (user?.id && userPet?.userId) {
-              console.log("Match request initiated", user, userPet);
-              
-              match(user.id, userPet.userId);
-            } else {
-              console.warn("Usuário não está logado ou dados do pet estão incompletos.", user, userPet);
-            }
-          }}
+          onPressOut={() => match(user!.id, userPet!.user.id)}
         >
           <Text style={styles.matchButtonText}>Match</Text>
         </TouchableOpacity>
