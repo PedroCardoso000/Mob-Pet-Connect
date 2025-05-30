@@ -75,7 +75,7 @@ const UserProfileScreen = () => {
 
             <View style={userScreenStyles.statButton}>
               <SmallText>Adicionar mais Pets</SmallText>
-              <TouchableOpacity style={userScreenStyles.editButton} onPress={() =>  navigation.navigate('CreatePet')}>
+              <TouchableOpacity style={userScreenStyles.editButton} onPress={() =>  console.log("Adicionar mais Pets", user)}>
                 <Image
                   source={require('../../../assets/addPet.png')}
                   style={{ width: 20, height: 20, borderColor: 'none' }}

@@ -54,7 +54,7 @@ export default function PetProfile({ route }: any) {
 
         <TouchableOpacity
           style={styles.matchButton}
-          onPressOut={() => match(user!.id, userPet!.user.id)}
+          onPressOut={() => match(user!.id, userPet!.userId)}
         >
           <Text style={styles.matchButtonText}>Match</Text>
         </TouchableOpacity>
@@ -63,7 +63,7 @@ export default function PetProfile({ route }: any) {
         <View style={styles.ownerContainer}>
           <Image source={exampleUser} style={styles.ownerImage} />
           <View style={styles.ownerInfo}>
-            <Text style={styles.ownerName}>{userPet?.user?.name}</Text>
+            <Text style={styles.ownerName}>{userPet?.username}</Text>
           </View>
         </View>
       </View>
