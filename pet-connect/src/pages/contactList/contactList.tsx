@@ -2,37 +2,53 @@ import { Contact } from "@/src/@types/Contact";
 import { Alert, ScrollView, StyleSheet, View } from "react-native";
 import { ContactView } from "../../components/ContactView";
 import { width } from "@/src/utils/width"
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "@/src/context/AuthContext";
 import { connectChat, disconnectChat } from "@/src/log/chatSocket";
+import { api } from "@/src/api/axios";
+import { User } from "@/src/@types/User";
+import { HttpStatusCode } from "axios";
 
-const mockContacts: Contact[] = [
-  { name: "Leandro Nepu" },
-  { name: "Davi Gregório" },
-  { name: "Pedro Cardoso" },
-  { name: "Ana Silva" },
-  { name: "Carlos Souza" },
-  { name: "Mariana Alves" },
-  { name: "Fernanda Costa" },
-  { name: "Rafael Lima" },
-  { name: "Beatriz Rocha" },
-  { name: "Gustavo Nunes" },
-  { name: "Juliana Martins" },
-  { name: "Vinícius Pereira" },
-  { name: "Larissa Oliveira" },
-  { name: "Fábio Santos" },
-  { name: "Camila Moura" },
-  { name: "André Barbosa" },
-  { name: "Patrícia Cunha" },
-  { name: "Rodrigo Vieira" },
-  { name: "Isabela Duarte" },
-  { name: "Lucas Fernandes" },
-  { name: "Carolina Rezende" },
-  { name: "Tiago Monteiro" },
-  { name: "João Vitor" },
-  { name: "Clara Mendes" }
-];
+export default function ContactList() {
+  const { user } = useContext(AuthContext);
+  const [contacts, setContacts] = useState<Contact[]>([]);
 
+  async function getUsers() {
+    try { 
+      const {status, data} = await api.get("/user");
+      if(status === HttpStatusCode.Ok){
+        setContacts(
+          data.map((x: User) => ({
+            id: x?.id,
+            name: x?.name,
+          }))
+        );
+      }
+    } catch (error) {
+      console.error("Erro ao buscar usuários:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (!user?.id) return;
+    getUsers();
+  }, []);
+
+return (
+  <ScrollView style={style.scrollView}>
+    <View style={style.view}>
+      {contacts.map((contact, index) => (
+        <View key={contact.id ?? index}>
+          <ContactView contact={contact} />
+          {index < contacts.length - 1 && (
+            <View style={style.divider} />
+          )}
+        </View>
+      ))}
+    </View>
+  </ScrollView>
+)
+}
 const style = StyleSheet.create({
   scrollView: {
     marginTop: 32,
@@ -43,37 +59,12 @@ const style = StyleSheet.create({
     gap: 16,
     width: width(0.9),
     marginHorizontal: "auto"
+  },
+  divider: {
+    height: 1,
+    backgroundColor: "#e0e0e0",
+    marginVertical: 8,
+    width: "100%",
+    alignSelf: "center"
   }
-})
-
-export default function ContactList() {
-  const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (!user?.id) return;
-
-    // Conecta ao WebSocket para receber notificações de novas mensagens
-    connectChat(user.id, (msg) => {
-      console.log("📨 Nova mensagem recebida:", msg);
-      Alert.alert("Nova mensagem!", `De: ${msg.sender} - ${msg.content}`);
-    });
-
-    return () => {
-      disconnectChat();
-    };
-  }, [user]);
-
-  return (
-    <ScrollView style={style.scrollView}>
-      <View style={style.view}>
-        {
-          mockContacts.map((contact, index) =>
-            <ContactView
-              key={index}
-              contact={contact} />
-          )
-        }
-      </View>
-    </ScrollView>
-  )
-}
+});
