@@ -47,7 +47,7 @@ export const stylesFriend = StyleSheet.create({
         fontWeight: "bold"
     },
     profileLocation: {
-        fontSize:14,
+        fontSize: 14,
         color: "#665"
     },
     objectivesSection: {
@@ -80,38 +80,21 @@ export const stylesFriend = StyleSheet.create({
         fontWeight: "bold",
         marginRight: 5,
     },
-    // Você pode manter este estilo, mas se continuar tendo problemas, 
-    // substitua justifyContent por marginRight como mostrado abaixo
+
+    
     petsContainer: {
         flexDirection: "row",
-        justifyContent: "space-between",
-    },
-    /* Alternativa se continuar tendo problemas:
-    petsContainer: {
-        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-between", // Corrigido!
+        gap: 12, // Espaço entre os cards (React Native >= 0.71)
     },
     petCard: {
-        width: "48%",
-        marginRight: "4%", // Adicione isso ao primeiro card
+        width: "48%", // Dois cards por linha com espaço entre eles
         borderWidth: 1,
         borderColor: "#e0e0e0",
         borderRadius: 8,
         overflow: "hidden",
-    },
-    petCardLast: {
-        width: "48%", // Sem margem para o último
-        borderWidth: 1,
-        borderColor: "#e0e0e0",
-        borderRadius: 8,
-        overflow: "hidden",
-    },
-    */
-    petCard: {
-        width: "48%",
-        borderWidth: 1,
-        borderColor: "#e0e0e0",
-        borderRadius: 8,
-        overflow: "hidden",
+        marginBottom: 12, // Espaço abaixo de cada card
     },
     petImage: {
         width: "100%",

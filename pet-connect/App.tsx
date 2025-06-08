@@ -1,7 +1,7 @@
 import "@/global.css";
 import LoginScreen from "./src/pages/login/login";
 import Menu from "./src/pages/menu";
-import {  AuthProvider } from "./src/context/AuthContext";
+import { AuthProvider } from "./src/context/AuthContext";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   createNavigationContainerRef,
@@ -11,7 +11,7 @@ import UserProfileScreen from "../pet-connect/src/pages/user-screen/userProfileS
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import RegisterScreen from "./src/pages/register/register";
 import { Chat } from "./src/pages/Chat";
-import PetProfile, { PropsPetProfile }  from "./src/pages/PetProfile";
+import PetProfile, { PropsPetProfile } from "./src/pages/PetProfile";
 import ContactList from "./src/pages/contactList/contactList";
 import { RootStackParamList } from "./src/navigator/app_navigator";
 import { PagesNavigator } from "./src/navigator/pages-navigator";
@@ -20,7 +20,7 @@ import CreatePet from "./src/pages/register-pet/create-pet"
 import { useContext } from "react";
 import { AuthContext } from "./src/context/AuthContext";
 import { useNavigationState } from "@react-navigation/native";
-
+import FriendViewScreen from "./src/pages/friend-view-screen/friend-view-screen";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const navigationRef = createNavigationContainerRef<RootStackParamList>();
@@ -56,20 +56,22 @@ export default function App() {
         </AuthProvider>
       </SafeAreaProvider>
     </NavigationContainer>
+
   );
 }
 
 function RootStack() {
   return (
     <Stack.Navigator initialRouteName={PagesNavigator.Login}>
-      <Stack.Screen options={{headerShown: false}} name={PagesNavigator.Login} component={LoginScreen} />
-      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.UserProfile} component={UserProfileScreen}/>
-      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Menu} component={Menu}  />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Login} component={LoginScreen} />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.UserProfile} component={UserProfileScreen} />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Menu} component={Menu} />
       <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Register} component={RegisterScreen} />
       <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.Chat} component={Chat} />
-      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.CreatePet} component={CreatePet}/>
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.CreatePet} component={CreatePet} />
       <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.ContactList} component={ContactList} />
       <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.PetProfile} component={PetProfile} />
+      <Stack.Screen options={{ headerShown: false }} name={PagesNavigator.FriendView} component={FriendViewScreen} />
     </Stack.Navigator>
   )
 }

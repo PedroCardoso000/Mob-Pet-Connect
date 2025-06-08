@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { User } from "../@types/User";
 
 export type RootStackParamList = {
   Login: undefined;
@@ -10,6 +11,7 @@ export type RootStackParamList = {
   ContactList: undefined;
   PetProfile: { petId: number } | undefined;
   CreatePet: undefined 
+  FriendView: { user: User  | null } | undefined   ;
 };
 
 export type NavigationProps = NativeStackNavigationProp<RootStackParamList, 'Login'>;

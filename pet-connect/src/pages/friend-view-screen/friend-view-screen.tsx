@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, SafeAreaView, ScrollView, StatusBar, Text, View } from 'react-native';
 import { stylesFriend } from "./friend-view-screen-style";
+import { User } from "@/src/@types/User";
+import { Pet } from "@/src/@types/Pet";
+import { useRoute } from "@react-navigation/native";
 
 export default function FriendViewScreen() {
+    const route = useRoute();
+    const { user } = route.params as { user: User };
+
     return (
         <SafeAreaView style={stylesFriend.container}>
             <StatusBar backgroundColor="#fff" barStyle="dark-content" />
@@ -13,18 +19,16 @@ export default function FriendViewScreen() {
                 />
             </View>
 
-            <ScrollView 
+            <ScrollView
                 style={stylesFriend.scrollView}
                 contentContainerStyle={stylesFriend.scrollViewContent}
             >
                 <View style={stylesFriend.profileHeader}>
                     <View style={stylesFriend.profileInfo}>
-                        <Text style={stylesFriend.profileName}>Leandro Júnior</Text>
-                        <Text style={stylesFriend.profileLocation}>Fortaleza - CE</Text>
+                        <Text style={stylesFriend.profileName}>{user?.name}</Text>
                     </View>
                 </View>
 
-                {/* Perfil do Usuário */}
                 <View style={stylesFriend.objectivesSection}>
                     <Text style={stylesFriend.sectionTitle}>Objetivo:</Text>
                     <View style={stylesFriend.bulletPoints}>
@@ -44,7 +48,6 @@ export default function FriendViewScreen() {
                     </View>
                 </View>
 
-                {/* Seção Pet */}
                 <View style={stylesFriend.petsSection}>
                     <View style={stylesFriend.petsSectionHeader}>
                         <Text style={stylesFriend.petsSectionTitle}>PETS</Text>
@@ -55,43 +58,25 @@ export default function FriendViewScreen() {
                     </View>
 
                     <View style={stylesFriend.petsContainer}>
-                        {/* Pet 1 */}
-                        <View style={stylesFriend.petCard}>
-                            <Image
-                                source={require('../../../assets/dog.jpg')}
-                                style={stylesFriend.petImage}
-                            />
-                            <View style={stylesFriend.petInfo}>
-                                <Text style={stylesFriend.petInfoLabel}>
-                                    Nome: <Text style={stylesFriend.petInfoValue}>Toto</Text>
-                                </Text>
-                                <Text style={stylesFriend.petInfoLabel}>
-                                    Sexo: <Text style={stylesFriend.petInfoValue}>M</Text>
-                                </Text>
-                                <Text style={stylesFriend.petInfoLabel}>
-                                    Raça: <Text style={stylesFriend.petInfoValue}>Labrador</Text>
-                                </Text>
-                            </View>
-                        </View>
-
-                        {/* Pet 2 */}
-                        <View style={stylesFriend.petCard}>
-                            <Image
-                                source={require('../../../assets/dog.jpg')}
-                                style={stylesFriend.petImage}
-                            />
-                            <View style={stylesFriend.petInfo}>
-                                <Text style={stylesFriend.petInfoLabel}>
-                                    Nome: <Text style={stylesFriend.petInfoValue}>Bud</Text>
-                                </Text>
-                                <Text style={stylesFriend.petInfoLabel}>
-                                    Sexo: <Text style={stylesFriend.petInfoValue}>M</Text>
-                                </Text>
-                                <Text style={stylesFriend.petInfoLabel}>
-                                    Raça: <Text style={stylesFriend.petInfoValue}>Golden</Text>
-                                </Text>
-                            </View>
-                        </View>
+                        {user?.pets?.length
+                            ? user.pets.map((x: Pet) => (
+                                <View style={stylesFriend.petCard} key={x?.id ?? Math.random()}>
+                                    <Image
+                                        source={require('../../../assets/dog.jpg')}
+                                        style={stylesFriend.petImage}
+                                    />
+                                    <View style={stylesFriend.petInfo}>
+                                        <Text style={stylesFriend.petInfoLabel}>
+                                            Nome: <Text style={stylesFriend.petInfoValue}>{x?.name}</Text>
+                                        </Text>
+                                        <Text style={stylesFriend.petInfoLabel}>
+                                            Raça: <Text style={stylesFriend.petInfoValue}>{x?.race}</Text>
+                                        </Text>
+                                    </View>
+                                </View>
+                            ))
+                            : <Text style={stylesFriend.petInfo}>Sem Pets</Text>
+                        }
                     </View>
                 </View>
             </ScrollView>
