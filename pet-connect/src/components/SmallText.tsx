@@ -9,7 +9,7 @@ interface SmallTextProps extends TextProps {
 }
 
 const SmallText: React.FC<SmallTextProps> = ({ children, style, ...props }) => (
-  <Text style={[{ fontSize: 12 }, style]} {...props}>
+  <Text style={[{ fontSize: 12}, style]} {...props}>
     {children}
   </Text>
 );

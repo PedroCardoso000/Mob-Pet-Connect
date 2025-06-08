@@ -1,7 +1,7 @@
 import "@/global.css";
 import LoginScreen from "./src/pages/login/login";
 import Menu from "./src/pages/menu";
-import { AuthContext, AuthProvider } from "./src/context/AuthContext";
+import {  AuthProvider } from "./src/context/AuthContext";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   createNavigationContainerRef,
@@ -17,6 +17,9 @@ import { RootStackParamList } from "./src/navigator/app_navigator";
 import { PagesNavigator } from "./src/navigator/pages-navigator";
 import { Footer } from "./src/components/Footer"
 import CreatePet from "./src/pages/register-pet/create-pet"
+import { useContext } from "react";
+import { AuthContext } from "./src/context/AuthContext";
+import { useNavigationState } from "@react-navigation/native";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -31,14 +34,25 @@ export function navigate<T extends keyof RootStackParamList>(
   }
 }
 
+function FooterConditional() {
+  const { user } = useContext(AuthContext);
+  const routeName = useNavigationState((state) => {
+    if (!state || !state.routes || state.index == null) return null;
+    return state.routes[state.index]?.name;
+  });
+
+  if (!user || routeName === PagesNavigator.Login) return null;
+  return <Footer />;
+}
+
 export default function App() {
 
   return (
     <NavigationContainer ref={navigationRef}>
       <SafeAreaProvider>
         <AuthProvider>
-          <RootStack/>
-          <Footer/>
+          <RootStack />
+          <FooterConditional />
         </AuthProvider>
       </SafeAreaProvider>
     </NavigationContainer>

@@ -11,7 +11,7 @@ import ButtonComponent from '@/src/components/ButtonConnect';
 import { AuthContext } from '@/src/context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProps } from '@/src/navigator/navigator-simple-app';
-import Loading from '@/src/components/Loading'; 
+import Loading from '@/src/components/Loading';
 
 const LoginScreen = () => {
   const navigation = useNavigation<NavigationProps>();
@@ -25,6 +25,10 @@ const LoginScreen = () => {
     try {
       setIsLoading(true);
       const response = await login(email, password);
+      if (response === null || response === undefined) {
+        setError(true)
+        return;
+      };
       return response;
     } catch (err) {
       setError(true);
@@ -33,7 +37,7 @@ const LoginScreen = () => {
     }
   };
 
-  if (isLoading) return <Loading />; 
+  if (isLoading) return <Loading />;
 
   return (
     <View style={loginstyles.container}>

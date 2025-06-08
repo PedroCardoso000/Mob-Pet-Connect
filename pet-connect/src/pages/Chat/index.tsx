@@ -33,7 +33,7 @@ export function Chat() {
   const [stompClient, setStompClient] = useState<CompatClient>();
 
   useEffect(() => {
-    const socket = new SockJS("http://172.29.80.1:8080/chat");
+    const socket = new SockJS("http://192.168.28.251:8080/chat");
     setStompClient(Stomp.over(socket));
   }, []);
 

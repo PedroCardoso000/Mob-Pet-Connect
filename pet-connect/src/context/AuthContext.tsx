@@ -35,6 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
                 navigation.navigate('Home');
                 return data;
             }
+            return null;
         } catch (error) {
             console.error('Erro ao fazer login:', error);
         }

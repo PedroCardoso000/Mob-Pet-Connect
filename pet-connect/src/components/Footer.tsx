@@ -66,9 +66,14 @@ export function Footer() {
     return state.routes[state.index]?.name;
   });
 
-  const { user } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   const handlePress = (page: PagesNavigator) => {
+    if (page === PagesNavigator.Login) {
+      logout(); // Limpa o usuário
+      navigation.navigate(PagesNavigator.Login as any);
+      return;
+    }
     navigation.navigate(page as any);
   };
 
@@ -137,15 +142,15 @@ export function Footer() {
 
       <Pressable
         style={styles.itemView}
-        onPress={() => { }}
+        onPress={() => handlePress(PagesNavigator.Login)}
         android_ripple={{ color: 'rgba(0, 0, 0, 0.1)' }}
       >
         <View style={styles.itemContent}>
           <View style={styles.iconContainer}>
-            <MaterialIcons name="settings" size={24} color="black" />
+            <MaterialIcons name="logout" size={24} color="black" />
           </View>
-          <Text style={styles.itemText}>Opções</Text>
-          {/* {selectedTab === 'Settings' && <View style={styles.selectedIndicator} />} */}
+          <Text style={styles.itemText}>Sair</Text>
+          {routeName === 'Login' && <View style={styles.selectedIndicator} />}
         </View>
       </Pressable>
     </View>
