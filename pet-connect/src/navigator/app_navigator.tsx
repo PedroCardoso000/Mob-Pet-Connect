@@ -24,8 +24,9 @@ export type RootStackParamList = {
   [PagesNavigator.Chat]: undefined;
   [PagesNavigator.Layout]: undefined;
   [PagesNavigator.Menu]: undefined;
-  [PagesNavigator.PetProfile]: {petId: number};
+  [PagesNavigator.PetProfile]: { petId: number };
   [PagesNavigator.UserProfile]: undefined;
+  [PagesNavigator.FriendView]: { user: number };
 };
 
 
@@ -61,4 +62,3 @@ export type RootStackParamList = {
 // };
 
 // export default AppNavigator;
-  
