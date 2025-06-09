@@ -1,7 +1,8 @@
 import { Dimensions, Image, Pressable, StyleSheet, Text, View } from "react-native";
-import { Pet } from "@/@types/Pet";
+import { Pet } from "../@types/Pet"
 import { useNavigation } from "@react-navigation/native";
 import { NavigationProps } from "../navigator/navigator-simple-app";
+import { useImage } from "../hooks/useImage";
 
 const exampleDog = require("@/assets/dog.jpg");
 
@@ -29,6 +30,7 @@ type Props = {
 
 export function MenuPet({pet}: Props) {
   const navigation = useNavigation<NavigationProps>();
+
   return (
     <Pressable>
       <View style={style.view} onTouchEnd={() => navigation.replace("Home")}>  

@@ -1,7 +1,9 @@
 import { Pet } from "@/src/@types/Pet";
+import { useImage } from "@/src/hooks/useImage";
 import { NavigationProps } from "@/src/navigator/navigator-simple-app";
 import { PagesNavigator } from "@/src/navigator/pages-navigator";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
 
 const exampleDog = require("@/assets/dog.jpg");
@@ -30,10 +32,12 @@ type Props = {
 
 export function MenuPet({pet}: Props) {
   const navigation = useNavigation<NavigationProps>();
+  const { imageUri } = useImage(pet.image)
+  
   return (
     <View style={style.view} onTouchEnd={() => navigation.navigate(PagesNavigator.PetProfile, {petId: pet.id})}>  
         <Image
-          source={exampleDog}
+          source={imageUri ? { uri: imageUri } : exampleDog}
           style={style.image}          
           borderRadius={4}      
         />

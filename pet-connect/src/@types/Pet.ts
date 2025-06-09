@@ -3,5 +3,6 @@ export type Pet = {
   name: string,
   gender: "MALE" | "FEMALE",
   birthDate: string,
+  image: string,
   race: string,
 }
