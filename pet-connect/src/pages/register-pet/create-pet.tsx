@@ -4,6 +4,7 @@ import {
     Alert,
     FlatList,
     Image,
+    ImageSourcePropType,
     Modal,
     ScrollView,
     Text,
@@ -17,6 +18,7 @@ import { Errors, PetData, Raca } from "./dates/typesPet";
 import CheckBox from "@/src/components/CheckBox";
 import { HttpStatusCode } from "axios";
 import { api } from "@/src/api/axios";
+import * as ImagePicker from 'expo-image-picker';
 
 const CreatePet = () => {
     const [petData, setPetData] = useState<PetData>({
@@ -36,6 +38,8 @@ const CreatePet = () => {
     const [sex, setSex] = useState<string>('');
     const [response, setReponse] = useState<boolean>(false);
 
+    const [imageUri, setImagePreview] = useState<string>();
+
     useEffect(() => {
         if (petData.especieId) {
             setRacasDisponiveis(racasData[petData.especieId] || [])
@@ -44,34 +48,6 @@ const CreatePet = () => {
         }
     }, [petData.especieId])
 
-    const validateForm = () => {
-        const newErrors: Errors = {}
-
-        if (!petData.nome.trim()) {
-            newErrors.nome = "Nome do Pet é obrigatório";
-        }
-
-        if (!petData.especieId) {
-            newErrors.especie = "Selecione a Espécie do Pet"
-        }
-
-        if (!petData.genero) {
-            newErrors.genero = "Selecione o Gênero do seu Pet"
-        }
-
-        setErrors(newErrors)
-        return Object.keys(newErrors).length === 0
-
-    }
-
-    const handleSubmit = () => {
-        if (validateForm()) {
-            console.log("Dados do pet:", petData)
-            Alert.alert("Sucesso", "Pet cadastrado com sucesso!")
-        } else {
-            Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios")
-        }
-    }
 
     const selectEspecie = (id: string, nome: string) => {
         setPetData({
@@ -93,9 +69,7 @@ const CreatePet = () => {
         setRacaModalVisible(false)
     }
 
-
     async function postPeet() {
-
         try {
             const { status, data } = await api.post('/pet', {
                 name: petData.nome,
@@ -105,23 +79,56 @@ const CreatePet = () => {
                 race: petData.racaNome
             });
 
-            if (status === HttpStatusCode.Ok) {
-                setReponse(true)
-                return data;
-            }
+            if (status !== HttpStatusCode.Ok) return;
+
+            setReponse(true);
+            uploadImage(data.id);
         } catch (error) {
-            console.error('Erro ao fazer login:', error);
+            console.error(error);
         }
+    }
+
+    async function uploadImage(petId: number) {
+        const formData = new FormData();
+
+        formData.append('image', {
+            uri: imageUri,
+            name: 'photo.jpg',
+            type: 'image/jpeg',
+        } as any); 
+
+        try {
+            await api.post(`pet/upload-image/${petId}`, formData, {
+            headers: {
+            'Content-Type': 'multipart/form-data'
+            }
+        });
+        } catch (error) {
+            console.error('Erro ao enviar imagem:', error);
+        }
+    }
 
 
+    async function pickImage() {
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        if (result.canceled) return; 
+            
+        console.log("Preview", result.assets[0].uri)
+
+        setImagePreview(result.assets[0].uri);
     }
 
     return (
         <ScrollView style={styleRegister.container}>
 
             <View style={styleRegister.avatarContainer}>
-                <Image source={require("")} style={styleRegister.avatar} />
-                <TouchableOpacity style={styleRegister.avatarButton}>
+                <Image source={{ uri: imageUri }} style={styleRegister.avatar} />
+                <TouchableOpacity style={styleRegister.avatarButton} onPress={pickImage}>
                     <Text style={styleRegister.avatarButtonText}>+</Text>
                 </TouchableOpacity>
             </View>

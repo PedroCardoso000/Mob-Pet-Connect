@@ -8,6 +8,7 @@ import { NavigationProps } from "../../navigator/navigator-simple-app";
 import { useNavigation } from "@react-navigation/native";
 import Loading from "../../components/Loading";
 import { sendNotification } from "../../log/chatSocket";
+import { useImage } from "@/src/hooks/useImage";
 const exampleUser = require("@/assets/user.png");
 const exampleDog = require("@/assets/dog.jpg");
 
@@ -16,6 +17,11 @@ export default function PetProfile({ route }: any) {
   const { userPet } = usePet(route.params.petId);
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useContext(AuthContext);
+  const { imageUri } = useImage(userPet?.image ?? null);
+
+  useEffect(() => {
+    console.log("PROFILE URI" , imageUri);
+  }, [imageUri])
 
   async function match(sender: number, receiver: number) {
     try {
@@ -35,7 +41,7 @@ export default function PetProfile({ route }: any) {
   if (isLoading) return <Loading />;
   return (
     <ScrollView style={styles.container}>
-      <Image source={exampleDog} style={styles.petImage} />
+      <Image source={imageUri ? { uri: imageUri } : exampleDog} style={styles.petImage} />
       <View style={styles.infoContainer}>
         <View style={styles.nameRow}>
           <Text style={styles.petName}>{userPet?.name}</Text>
