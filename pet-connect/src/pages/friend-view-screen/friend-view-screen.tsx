@@ -4,6 +4,7 @@ import { stylesFriend } from "./friend-view-screen-style";
 import { User } from "@/src/@types/User";
 import { Pet } from "@/src/@types/Pet";
 import { useRoute } from "@react-navigation/native";
+import { useImage } from "@/src/hooks/useImage";
 
 export default function FriendViewScreen() {
     const route = useRoute();
@@ -60,20 +61,7 @@ export default function FriendViewScreen() {
                     <View style={stylesFriend.petsContainer}>
                         {user?.pets?.length
                             ? user.pets.map((x: Pet) => (
-                                <View style={stylesFriend.petCard} key={x?.id ?? Math.random()}>
-                                    <Image
-                                        source={require('../../../assets/dog.jpg')}
-                                        style={stylesFriend.petImage}
-                                    />
-                                    <View style={stylesFriend.petInfo}>
-                                        <Text style={stylesFriend.petInfoLabel}>
-                                            Nome: <Text style={stylesFriend.petInfoValue}>{x?.name}</Text>
-                                        </Text>
-                                        <Text style={stylesFriend.petInfoLabel}>
-                                            Raça: <Text style={stylesFriend.petInfoValue}>{x?.race}</Text>
-                                        </Text>
-                                    </View>
-                                </View>
+                                <PetView pet={x}/>
                             ))
                             : <Text style={stylesFriend.petInfo}>Sem Pets</Text>
                         }
@@ -82,4 +70,26 @@ export default function FriendViewScreen() {
             </ScrollView>
         </SafeAreaView>
     );
+}
+
+function PetView({ pet }: {pet: Pet}) {
+
+    const { imageUri } = useImage(pet.image)
+
+    return (
+        <View style={stylesFriend.petCard} key={pet.id ?? Math.random()}>
+            <Image
+                source={imageUri ? {uri: imageUri} : require('../../../assets/dog.jpg')}
+                style={stylesFriend.petImage}
+            />
+            <View style={stylesFriend.petInfo}>
+                <Text style={stylesFriend.petInfoLabel}>
+                    Nome: <Text style={stylesFriend.petInfoValue}>{pet.name}</Text>
+                </Text>
+                <Text style={stylesFriend.petInfoLabel}>
+                    Raça: <Text style={stylesFriend.petInfoValue}>{pet.race}</Text>
+                </Text>
+            </View>
+        </View>
+    )
 }
